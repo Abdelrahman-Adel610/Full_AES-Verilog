@@ -1,0 +1,5 @@
+module main();
+reg clk;
+always
+clk=~clk;#50;
+endmodule
