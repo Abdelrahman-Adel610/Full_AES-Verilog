@@ -1,11 +1,11 @@
-module ShiftRows(instate, outstate);
+module InvShiftRows(instate, outstate);
 
 input [127 : 0] instate;
 output [127 : 0] outstate;
 reg [127 : 0] out;
 
 initial begin
-#1;
+#2;
 //first row
 out[127 -: 8] = instate[127 -: 8];
 out[95 -: 8] = instate[95 -: 8];

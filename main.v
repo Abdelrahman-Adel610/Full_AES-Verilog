@@ -1,7 +1,6 @@
 `include "EncryptionRound.v"
-`include "InvShiftRows.v"
-`include "InvSubBytes.v"
-`include "Inv_MixColumns.v"
+`include "DecryptionRound.v"
+
 
 module main(
     input wire [127:0] instate,	

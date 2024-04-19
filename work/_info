@@ -9,13 +9,13 @@ z2
 cModel Technology
 dD:/model_sim
 vAddRoundKey
-Z0 !s110 1713565004
+Z0 !s110 1713570641
 !i10b 1
-!s100 LVGXofQAUUoTDd2^A=41R1
-I7g[oY7CX8TfS29kA81zTd1
+!s100 K7DA71G]A3PE`aVRVjmPY1
+I[ERAa`]aVBI7SSR0VgS^B3
 Z1 VDg1SIo80bB@j0V0VzS_@n1
 Z2 dC:/Users/LAPTOP/OneDrive/Desktop/1_St Year/Second term/Adv logic/project
-Z3 w1713564832
+Z3 w1713570492
 Z4 8AddRoundKey.v
 Z5 FAddRoundKey.v
 L0 1
@@ -23,23 +23,23 @@ Z6 OV;L;10.5b;63
 r1
 !s85 0
 31
-Z7 !s108 1713565004.000000
-Z8 !s107 Inv_MixColumns.v|InvSubBytes.v|InvShiftRows.v|AddRoundKey.v|MixColumns.v|SubBytes.v|ShiftRows.v|EncryptionRound.v|C:\Users\LAPTOP\OneDrive\Desktop\1_St Year\Second term\Adv logic\project\main.v|
-Z9 !s90 -reportprogress|300|-work|work|-stats=none|C:\Users\LAPTOP\OneDrive\Desktop\1_St Year\Second term\Adv logic\project\main.v|
+Z7 !s108 1713570641.000000
+Z8 !s107 AddRoundKey.v|Inv_MixColumns.v|InvSubBytes.v|InvShiftRows.v|C:/Users/LAPTOP/OneDrive/Desktop/1_St Year/Second term/Adv logic/project/DecryptionRound.v|
+Z9 !s90 -reportprogress|300|-work|work|-stats=none|C:/Users/LAPTOP/OneDrive/Desktop/1_St Year/Second term/Adv logic/project/DecryptionRound.v|
 !i113 1
 Z10 o-work work
 Z11 tCvgOpt 0
 n@add@round@key
-vEncryptionRound
+vDecryptionRound
 R0
 !i10b 1
-!s100 D_60Af4bA4RRi0WZzikd33
-ImJWnG<5]fojeCId@Aj1`83
+!s100 >IV6[2WnnJO`U8@SOXE@l1
+IRZejVCfX9b>cLDl_3`;c>3
 R1
 R2
-w1713564867
-8EncryptionRound.v
-FEncryptionRound.v
+w1713570044
+8C:/Users/LAPTOP/OneDrive/Desktop/1_St Year/Second term/Adv logic/project/DecryptionRound.v
+FC:/Users/LAPTOP/OneDrive/Desktop/1_St Year/Second term/Adv logic/project/DecryptionRound.v
 L0 5
 R6
 r1
@@ -51,18 +51,62 @@ R9
 !i113 1
 R10
 R11
+n@decryption@round
+vEncryptionRound
+R0
+!i10b 1
+!s100 <DYRR5NdjjAlABj^SS@KQ1
+IfoeVIe6b3RXah0g<[Q[gK0
+R1
+R2
+w1713570070
+8C:/Users/LAPTOP/OneDrive/Desktop/1_St Year/Second term/Adv logic/project/EncryptionRound.v
+FC:/Users/LAPTOP/OneDrive/Desktop/1_St Year/Second term/Adv logic/project/EncryptionRound.v
+L0 5
+R6
+r1
+!s85 0
+31
+R7
+Z12 !s107 AddRoundKey.v|MixColumns.v|SubBytes.v|ShiftRows.v|C:/Users/LAPTOP/OneDrive/Desktop/1_St Year/Second term/Adv logic/project/EncryptionRound.v|
+Z13 !s90 -reportprogress|300|-work|work|-stats=none|C:/Users/LAPTOP/OneDrive/Desktop/1_St Year/Second term/Adv logic/project/EncryptionRound.v|
+!i113 1
+R10
+R11
 n@encryption@round
 vInv_MixColumns
 R0
 !i10b 1
-!s100 R80oYmKhBWLIaU<CelNdC1
-IRB_FNG?D7g7_?gj;dz1Nb2
+!s100 AMYTUWXID58BQdH;2STgT2
+I4zz]f_=nFGFBjikVH`O?20
 R1
 R2
-R3
-8Inv_MixColumns.v
-FInv_MixColumns.v
+w1713570632
+8C:/Users/LAPTOP/OneDrive/Desktop/1_St Year/Second term/Adv logic/project/Inv_MixColumns.v
+FC:/Users/LAPTOP/OneDrive/Desktop/1_St Year/Second term/Adv logic/project/Inv_MixColumns.v
 L0 2
+R6
+r1
+!s85 0
+31
+R7
+!s107 C:/Users/LAPTOP/OneDrive/Desktop/1_St Year/Second term/Adv logic/project/Inv_MixColumns.v|
+!s90 -reportprogress|300|-work|work|-stats=none|C:/Users/LAPTOP/OneDrive/Desktop/1_St Year/Second term/Adv logic/project/Inv_MixColumns.v|
+!i113 1
+R10
+R11
+n@inv_@mix@columns
+vInvShiftRows
+R0
+!i10b 1
+!s100 KOm`h2_:<bfO@mfmQ2>Uj2
+IMWXH79>j`U:S7H=[Q^VUg0
+R1
+R2
+Z14 w1713570634
+Z15 8InvShiftRows.v
+Z16 FInvShiftRows.v
+L0 1
 R6
 r1
 !s85 0
@@ -73,7 +117,7 @@ R9
 !i113 1
 R10
 R11
-n@inv_@mix@columns
+n@inv@shift@rows
 vInvSubBytes
 R0
 !i10b 1
@@ -81,9 +125,9 @@ R0
 I4AE0`Be4Y3BVDVkW`VGRf2
 R1
 R2
-R3
-Z12 8InvSubBytes.v
-Z13 FInvSubBytes.v
+Z17 w1713564832
+Z18 8InvSubBytes.v
+Z19 FInvSubBytes.v
 L0 2
 R6
 r1
@@ -103,9 +147,9 @@ R0
 IQgHOF9_`:K1HZoFReAbg10
 R1
 R2
-R3
-R12
-R13
+R17
+R18
+R19
 L0 92
 R6
 r1
@@ -121,21 +165,21 @@ n@inv@sub@bytes_@d@u@t
 vmain
 R0
 !i10b 1
-!s100 <WikYhW=;ibb5c@TH?1<a1
-IR]HP=F1ePhImCVd8n7W>53
+!s100 >gP`fa:e3ikHIR@PD6>3P1
+IUe`E?9LZT<CT]G6<Q0a0B2
 R1
 R2
-w1713565003
-8C:\Users\LAPTOP\OneDrive\Desktop\1_St Year\Second term\Adv logic\project\main.v
-FC:\Users\LAPTOP\OneDrive\Desktop\1_St Year\Second term\Adv logic\project\main.v
-L0 6
+w1713569433
+8C:/Users/LAPTOP/OneDrive/Desktop/1_St Year/Second term/Adv logic/project/main.v
+FC:/Users/LAPTOP/OneDrive/Desktop/1_St Year/Second term/Adv logic/project/main.v
+L0 5
 R6
 r1
 !s85 0
 31
 R7
-R8
-R9
+!s107 Inv_MixColumns.v|InvSubBytes.v|InvShiftRows.v|DecryptionRound.v|AddRoundKey.v|MixColumns.v|SubBytes.v|ShiftRows.v|EncryptionRound.v|C:/Users/LAPTOP/OneDrive/Desktop/1_St Year/Second term/Adv logic/project/main.v|
+!s90 -reportprogress|300|-work|work|-stats=none|C:/Users/LAPTOP/OneDrive/Desktop/1_St Year/Second term/Adv logic/project/main.v|
 !i113 1
 R10
 R11
@@ -146,7 +190,7 @@ R0
 Ic3_W[GW?mUHnZ]45hGoK^2
 R1
 R2
-R3
+R17
 8MixColumns.v
 FMixColumns.v
 L0 1
@@ -155,8 +199,8 @@ r1
 !s85 0
 31
 R7
-R8
-R9
+R12
+R13
 !i113 1
 R10
 R11
@@ -164,21 +208,21 @@ n@mix@columns
 vShiftRows
 R0
 !i10b 1
-!s100 3Dg1Im2GIJGHCc5MZzDg10
-I9ATIEEYgh2gTl7CbMCOYl3
+!s100 B_oZDOYI3YEi0l5RZS^J43
+IJlSa2F[MaO3MP6:c_fci00
 R1
 R2
-R3
-Z14 8InvShiftRows.v
-Z15 FInvShiftRows.v
+Z20 w1713570241
+Z21 8ShiftRows.v
+Z22 FShiftRows.v
 L0 1
 R6
 r1
 !s85 0
 31
 R7
-R8
-R9
+R12
+R13
 !i113 1
 R10
 R11
@@ -190,17 +234,17 @@ R0
 I[@UJaDbfmKKFDbe5cUf:E0
 R1
 R2
-R3
-Z16 8SubBytes.v
-Z17 FSubBytes.v
+R17
+Z23 8SubBytes.v
+Z24 FSubBytes.v
 L0 2
 R6
 r1
 !s85 0
 31
 R7
-R8
-R9
+R12
+R13
 !i113 1
 R10
 R11
@@ -212,17 +256,17 @@ R0
 ImMZf6DAYo^>dXKjEG>VAa3
 R1
 R2
-R3
-R16
 R17
+R23
+R24
 L0 95
 R6
 r1
 !s85 0
 31
 R7
-R8
-R9
+R12
+R13
 !i113 1
 R10
 R11
@@ -230,14 +274,14 @@ n@sub@bytes_@d@u@t
 vTest_AddRoundKey
 R0
 !i10b 1
-!s100 jEjN6[;ZTS<@eFXcz4=J^1
-I[Y?M5jAIf@WSFET_BzCSd2
+!s100 9nmaZ<_[h9[?<gRJfP8]m2
+I31A:JI7FZmSYIdNgYM12R1
 R1
 R2
 R3
 R4
 R5
-L0 8
+L0 9
 R6
 r1
 !s85 0
@@ -256,10 +300,10 @@ R0
 Ih=nh_Di66C=akVfgcEZP80
 R1
 R2
-R3
 R14
 R15
-Z18 L0 40
+R16
+Z25 L0 40
 R6
 r1
 !s85 0
@@ -278,17 +322,17 @@ R0
 IA9dS<]9PQR8YU?=idMY5R3
 R1
 R2
-R3
-8ShiftRows.v
-FShiftRows.v
-R18
+R20
+R21
+R22
+R25
 R6
 r1
 !s85 0
 31
 R7
-R8
-R9
+R12
+R13
 !i113 1
 R10
 R11
