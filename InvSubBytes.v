@@ -2,14 +2,10 @@
 module InvSubBytes(instate,outstate);
 input[127:0]instate;
 output[127:0]outstate;
-reg[7:0]prev_state[0:15];
-reg[7:0]new_state[0:15];
 reg[127:0]out_state;
 reg[3:0]row;
 reg[3:0]col;
 integer  i;
-integer  j;
-integer  k;
 // Setting the inverse Rijndael S-box as a 1D array (flattened)
 reg [7:0] Inv_S_box [0:255];
 initial
@@ -81,34 +77,12 @@ initial
 end 
 initial
 begin
-#1;                           // (it will not work with out it)small delay to make sure of recieving the whole input bits
-k=0;
-for(i=0;i<16;i=i+1)
-begin
-   for(j=0;j<8;j=j+1)
-   begin 
-       prev_state[i][j]=instate[k];    // transforming input from flattened array to array of bytes
-       k=k+1;
-   end
- end
-
-
-for(i=0;i<16;i=i+1)
-begin
-  row=prev_state[i][7:4];
-  col=prev_state[i][3:0];
-  new_state[i]=Inv_S_box[row*16+col];
-end
-
-k=0;
-
-for(i=0;i<16;i=i+1)
-begin
-   for(j=0;j<8;j=j+1)
-   begin 
-	out_state[k]=new_state[i][j];    // transforming output to flattened array
-        k=k+1;   
-   end
+#1;                          
+for(i=0;i<128;i=i+8)
+begin 
+row=instate[(i+4)+:4];
+col=instate[i+:4];
+out_state[i +: 8]=Inv_S_box[row*16+col];
 end
 end
 assign outstate=out_state;
@@ -124,3 +98,4 @@ instate=128'bx10010011_11100001_01001101_10001001_01110110;
 end
 InvSubBytes ss(instate,out);
 endmodule
+

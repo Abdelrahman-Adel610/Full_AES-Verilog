@@ -2,10 +2,14 @@
 module SubBytes (instate,outstate);
 input[127:0]instate;
 output[127:0]outstate;
+reg[7:0]prev_state[0:15];
+reg[7:0]new_state[0:15];
 reg[127:0]out_state;
 reg[3:0]row;
 reg[3:0]col;
 integer  i;
+integer  j;
+integer  k;
 // Setting the Rijndael S-box as a 1D array (flattened)
 reg [7:0] S_box [0:255];
 initial
@@ -77,11 +81,11 @@ initial
 end 
 initial
 begin
-#1;                          
+#1;                           // (it will not work with out it)small delay to make sure of recieving the whole input bits
 for(i=0;i<128;i=i+8)
 begin 
-row=instate[(i+4)+:4];
-col=instate[i+:4];
+row=prev_state[(i+4)+:4];
+col=prev_state[i+:4];
 out_state[i +: 8]=S_box[row*16+col];
 end
 end
