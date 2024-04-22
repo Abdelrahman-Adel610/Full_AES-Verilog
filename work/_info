@@ -9,7 +9,7 @@ z2
 cModel Technology
 dD:/model_sim
 vAddRoundKey
-Z0 !s110 1713796828
+Z0 !s110 1713797352
 !i10b 1
 !s100 LVGXofQAUUoTDd2^A=41R1
 I7g[oY7CX8TfS29kA81zTd1
@@ -23,15 +23,15 @@ Z6 OV;L;10.5b;63
 r1
 !s85 0
 31
-Z7 !s108 1713796828.000000
-Z8 !s107 AddRoundKey.v|MixColumns.v|SubBytes.v|ShiftRows.v|C:/Users/LAPTOP/OneDrive/Desktop/1_St Year/Second term/Adv logic/project/EncryptionRound.v|
-Z9 !s90 -reportprogress|300|-work|work|-stats=none|C:/Users/LAPTOP/OneDrive/Desktop/1_St Year/Second term/Adv logic/project/EncryptionRound.v|
+Z7 !s108 1713797352.000000
+Z8 !s107 AddRoundKey.v|Inv_MixColumns.v|InvSubBytes.v|InvShiftRows.v|C:/Users/LAPTOP/OneDrive/Desktop/1_St Year/Second term/Adv logic/project/DecryptionRound.v|
+Z9 !s90 -reportprogress|300|-work|work|-stats=none|C:/Users/LAPTOP/OneDrive/Desktop/1_St Year/Second term/Adv logic/project/DecryptionRound.v|
 !i113 1
 Z10 o-work work
 Z11 tCvgOpt 0
 n@add@round@key
 vDecryptionRound
-Z12 !s110 1713796784
+R0
 !i10b 1
 !s100 PE2YVOHK[::L2SjnlGh0i1
 I0L[LUGfcd;CfgnDa_TZT<1
@@ -45,9 +45,9 @@ R6
 r1
 !s85 0
 31
-Z13 !s108 1713796784.000000
-Z14 !s107 AddRoundKey.v|Inv_MixColumns.v|InvSubBytes.v|InvShiftRows.v|C:/Users/LAPTOP/OneDrive/Desktop/1_St Year/Second term/Adv logic/project/DecryptionRound.v|
-Z15 !s90 -reportprogress|300|-work|work|-stats=none|C:/Users/LAPTOP/OneDrive/Desktop/1_St Year/Second term/Adv logic/project/DecryptionRound.v|
+R7
+R8
+R9
 !i113 1
 R10
 R11
@@ -68,20 +68,20 @@ r1
 !s85 0
 31
 R7
-R8
-R9
+Z12 !s107 AddRoundKey.v|MixColumns.v|SubBytes.v|ShiftRows.v|C:/Users/LAPTOP/OneDrive/Desktop/1_St Year/Second term/Adv logic/project/EncryptionRound.v|
+Z13 !s90 -reportprogress|300|-work|work|-stats=none|C:/Users/LAPTOP/OneDrive/Desktop/1_St Year/Second term/Adv logic/project/EncryptionRound.v|
 !i113 1
 R10
 R11
 n@encryption@round
 vInv_MixColumns
-R12
+R0
 !i10b 1
-!s100 13SZGefSSB;XBB^mhX?5L1
-InKNg2n1zWcGdYI0mk3CDF3
+!s100 VGJMIbfII_Ge`bz]8B:^U0
+I9mlW2`9l6FVzaCR<n6cQV0
 R1
 R2
-w1713736548
+w1713797341
 8C:/Users/LAPTOP/OneDrive/Desktop/1_St Year/Second term/Adv logic/project/Inv_MixColumns.v
 FC:/Users/LAPTOP/OneDrive/Desktop/1_St Year/Second term/Adv logic/project/Inv_MixColumns.v
 L0 2
@@ -89,7 +89,7 @@ R6
 r1
 !s85 0
 31
-R13
+R7
 !s107 C:/Users/LAPTOP/OneDrive/Desktop/1_St Year/Second term/Adv logic/project/Inv_MixColumns.v|
 !s90 -reportprogress|300|-work|work|-stats=none|C:/Users/LAPTOP/OneDrive/Desktop/1_St Year/Second term/Adv logic/project/Inv_MixColumns.v|
 !i113 1
@@ -97,23 +97,23 @@ R10
 R11
 n@inv_@mix@columns
 vInvShiftRows
-Z16 !s110 1713796814
+R0
 !i10b 1
 !s100 J3c`OVaoMj==hHR?1MI5>3
-IlTZ=3[L3@b0V>X?ojHbe00
+IniK6Yo@b5]FNXk4BE]0nn0
 R1
 R2
-Z17 w1713796776
-Z18 8C:\Users\LAPTOP\OneDrive\Desktop\1_St Year\Second term\Adv logic\project\InvShiftRows.v
-Z19 FC:\Users\LAPTOP\OneDrive\Desktop\1_St Year\Second term\Adv logic\project\InvShiftRows.v
+Z14 w1713796776
+Z15 8InvShiftRows.v
+Z16 FInvShiftRows.v
 L0 1
 R6
 r1
 !s85 0
 31
-Z20 !s108 1713796814.000000
-Z21 !s107 C:\Users\LAPTOP\OneDrive\Desktop\1_St Year\Second term\Adv logic\project\InvShiftRows.v|
-Z22 !s90 -reportprogress|300|-work|work|-stats=none|C:\Users\LAPTOP\OneDrive\Desktop\1_St Year\Second term\Adv logic\project\InvShiftRows.v|
+R7
+R8
+R9
 !i113 1
 R10
 R11
@@ -125,45 +125,45 @@ vInvSubBytes
 I4AE0`Be4Y3BVDVkW`VGRf2
 R1
 R2
-Z23 w1713564832
-Z24 8InvSubBytes.v
-Z25 FInvSubBytes.v
+w1713564832
+Z17 8InvSubBytes.v
+Z18 FInvSubBytes.v
 L0 2
 R6
 r1
 !s85 0
 31
 !s108 1713736549.000000
-R14
-R15
+R8
+R9
 !i113 1
 R10
 R11
 n@inv@sub@bytes
 vInvSubBytes_DUT
-R12
+R0
 !i10b 1
 !s100 4K61?IJfzdWRG0Wb20zc@0
 Igo?I`b8QGDjg?W[@ibKJR0
 R1
 R2
-Z26 w1713795976
-R24
-R25
+Z19 w1713795976
+R17
+R18
 L0 88
 R6
 r1
 !s85 0
 31
-R13
-R14
-R15
+R7
+R8
+R9
 !i113 1
 R10
 R11
 n@inv@sub@bytes_@d@u@t
 vmain
-R12
+R0
 !i10b 1
 !s100 >gP`fa:e3ikHIR@PD6>3P1
 IUe`E?9LZT<CT]G6<Q0a0B2
@@ -177,7 +177,7 @@ R6
 r1
 !s85 0
 31
-R13
+R7
 !s107 Inv_MixColumns.v|InvSubBytes.v|InvShiftRows.v|DecryptionRound.v|AddRoundKey.v|MixColumns.v|SubBytes.v|ShiftRows.v|EncryptionRound.v|C:/Users/LAPTOP/OneDrive/Desktop/1_St Year/Second term/Adv logic/project/main.v|
 !s90 -reportprogress|300|-work|work|-stats=none|C:/Users/LAPTOP/OneDrive/Desktop/1_St Year/Second term/Adv logic/project/main.v|
 !i113 1
@@ -186,11 +186,11 @@ R11
 vMixColumns
 R0
 !i10b 1
-!s100 I_=65MgFiF6RzmXoXIUkV0
-Ic3_W[GW?mUHnZ]45hGoK^2
+!s100 :XS4=Yn[YB43fOMH>X:aT2
+IJ@le2j3FFI;H:l4g=R29h3
 R1
 R2
-R23
+w1713797284
 8MixColumns.v
 FMixColumns.v
 L0 1
@@ -199,8 +199,8 @@ r1
 !s85 0
 31
 R7
-R8
-R9
+R12
+R13
 !i113 1
 R10
 R11
@@ -212,17 +212,17 @@ R0
 IJGLG]OKQfW4DeYPINLU1o0
 R1
 R2
-Z27 w1713796595
-Z28 8ShiftRows.v
-Z29 FShiftRows.v
+Z20 w1713796595
+Z21 8ShiftRows.v
+Z22 FShiftRows.v
 L0 1
 R6
 r1
 !s85 0
 31
 R7
-R8
-R9
+R12
+R13
 !i113 1
 R10
 R11
@@ -234,9 +234,31 @@ R0
 Io;MGMRYj[b[jCcNcXmI@W3
 R1
 R2
-Z30 w1713795302
-Z31 8SubBytes.v
-Z32 FSubBytes.v
+Z23 w1713795302
+Z24 8SubBytes.v
+Z25 FSubBytes.v
+L0 2
+R6
+r1
+!s85 0
+31
+R7
+R12
+R13
+!i113 1
+R10
+R11
+n@sub@bytes
+vSubBytes2
+R0
+!i10b 1
+!s100 DWAW=1M6l_Q>M7OBgh8T=0
+Ilc8a;BSInln_=FZbNo4Dm2
+R1
+R2
+R19
+R17
+R18
 L0 2
 R6
 r1
@@ -245,28 +267,6 @@ r1
 R7
 R8
 R9
-!i113 1
-R10
-R11
-n@sub@bytes
-vSubBytes2
-R12
-!i10b 1
-!s100 DWAW=1M6l_Q>M7OBgh8T=0
-Ilc8a;BSInln_=FZbNo4Dm2
-R1
-R2
-R26
-R24
-R25
-L0 2
-R6
-r1
-!s85 0
-31
-R13
-R14
-R15
 !i113 1
 R10
 R11
@@ -278,17 +278,17 @@ R0
 IPjOWFdWB5en1biNz=[5Zn2
 R1
 R2
-R30
-R31
-R32
-Z33 L0 90
+R23
+R24
+R25
+Z26 L0 90
 R6
 r1
 !s85 0
 31
 R7
-R8
-R9
+R12
+R13
 !i113 1
 R10
 R11
@@ -303,7 +303,7 @@ R2
 w1713795061
 8C:/Users/LAPTOP/OneDrive/Desktop/1_St Year/Second term/Adv logic/project/SubBytes2.v
 FC:/Users/LAPTOP/OneDrive/Desktop/1_St Year/Second term/Adv logic/project/SubBytes2.v
-R33
+R26
 R6
 r1
 !s85 0
@@ -338,23 +338,23 @@ R10
 R11
 n@test_@add@round@key
 vTest_InvShiftRows
-R16
+R0
 !i10b 1
 !s100 2DMa4TEJS1bW5S[jo3d8F3
-IPmCOBJzhgdmGia;`>9`kn3
+IK8:cWGO8hDMD@200<[H@f0
 R1
 R2
-R17
-R18
-R19
+R14
+R15
+R16
 L0 35
 R6
 r1
 !s85 0
 31
-R20
-R21
-R22
+R7
+R8
+R9
 !i113 1
 R10
 R11
@@ -366,17 +366,17 @@ R0
 IS:Mg8Jm^Bhkllo1PcVz4<0
 R1
 R2
-R27
-R28
-R29
+R20
+R21
+R22
 L0 36
 R6
 r1
 !s85 0
 31
 R7
-R8
-R9
+R12
+R13
 !i113 1
 R10
 R11
