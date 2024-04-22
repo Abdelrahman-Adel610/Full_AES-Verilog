@@ -1,14 +1,8 @@
 module AddRoundKey(instate, outstate, Key);
 input [127 : 0] instate;
-output reg [127 : 0] outstate;
-
+output  [127 : 0] outstate;
 input [127 : 0] Key;
-initial
-begin
-#6;
-outstate = instate ^ Key;
-end
-
+assign outstate = instate ^ Key;
 endmodule
 
 module Test_AddRoundKey();

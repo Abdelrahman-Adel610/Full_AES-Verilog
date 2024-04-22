@@ -1,21 +1,4 @@
-{C:/Users/LAPTOP/OneDrive/Desktop/1_St Year/Second term/Adv logic/project/DecryptionRound.v} {1 {vlog -work work -stats=none {C:/Users/LAPTOP/OneDrive/Desktop/1_St Year/Second term/Adv logic/project/DecryptionRound.v}
-Model Technology ModelSim - Intel FPGA Edition vlog 10.5b Compiler 2016.10 Oct  5 2016
--- Compiling module InvShiftRows
--- Compiling module Test_InvShiftRows
--- Compiling module InvSubBytes
--- Compiling module InvSubBytes_DUT
--- Compiling module Inv_MixColumns
--- Compiling module AddRoundKey
--- Compiling module Test_AddRoundKey
--- Compiling module DecryptionRound
-
-Top level modules:
-	Test_InvShiftRows
-	InvSubBytes_DUT
-	Test_AddRoundKey
-	DecryptionRound
-
-} {} {}} {C:/Users/LAPTOP/OneDrive/Desktop/1_St Year/Second term/Adv logic/project/ShiftRows.v} {1 {vlog -work work -stats=none {C:/Users/LAPTOP/OneDrive/Desktop/1_St Year/Second term/Adv logic/project/ShiftRows.v}
+{C:/Users/LAPTOP/OneDrive/Desktop/1_St Year/Second term/Adv logic/project/ShiftRows.v} {1 {vlog -work work -stats=none {C:/Users/LAPTOP/OneDrive/Desktop/1_St Year/Second term/Adv logic/project/ShiftRows.v}
 Model Technology ModelSim - Intel FPGA Edition vlog 10.5b Compiler 2016.10 Oct  5 2016
 -- Compiling module ShiftRows
 -- Compiling module Test_ShiftRows
@@ -29,6 +12,7 @@ Model Technology ModelSim - Intel FPGA Edition vlog 10.5b Compiler 2016.10 Oct  
 -- Compiling module SubBytes_DUT
 
 Top level modules:
+	SubBytes
 	SubBytes_DUT
 
 } {} {}} {C:/Users/LAPTOP/OneDrive/Desktop/1_St Year/Second term/Adv logic/project/main.v} {2 {vlog -work work -stats=none {C:/Users/LAPTOP/OneDrive/Desktop/1_St Year/Second term/Adv logic/project/main.v}
@@ -43,7 +27,7 @@ Model Technology ModelSim - Intel FPGA Edition vlog 10.5b Compiler 2016.10 Oct  
 -- Compiling module EncryptionRound
 -- Compiling module InvShiftRows
 -- Compiling module Test_InvShiftRows
--- Compiling module InvSubBytes
+-- Compiling module SubBytes2
 -- Compiling module InvSubBytes_DUT
 -- Compiling module Inv_MixColumns
 ** Warning: ** while parsing file included at C:/Users/LAPTOP/OneDrive/Desktop/1_St Year/Second term/Adv logic/project/main.v(2)
@@ -52,7 +36,7 @@ Model Technology ModelSim - Intel FPGA Edition vlog 10.5b Compiler 2016.10 Oct  
 -- Compiling module AddRoundKey
 ** Warning: ** while parsing file included at C:/Users/LAPTOP/OneDrive/Desktop/1_St Year/Second term/Adv logic/project/main.v(2)
 ** while parsing file included at DecryptionRound.v(4)
-** at AddRoundKey.v(14): (vlog-2275) 'Test_AddRoundKey' already exists and will be overwritten.
+** at AddRoundKey.v(8): (vlog-2275) 'Test_AddRoundKey' already exists and will be overwritten.
 -- Compiling module Test_AddRoundKey
 -- Compiling module DecryptionRound
 -- Compiling module main
@@ -67,6 +51,24 @@ Top level modules:
 	DecryptionRound
 	main
 
+} {} {}} {C:/Users/LAPTOP/OneDrive/Desktop/1_St Year/Second term/Adv logic/project/DecryptionRound.v} {1 {vlog -work work -stats=none {C:/Users/LAPTOP/OneDrive/Desktop/1_St Year/Second term/Adv logic/project/DecryptionRound.v}
+Model Technology ModelSim - Intel FPGA Edition vlog 10.5b Compiler 2016.10 Oct  5 2016
+-- Compiling module InvShiftRows
+-- Compiling module Test_InvShiftRows
+-- Compiling module SubBytes2
+-- Compiling module InvSubBytes_DUT
+-- Compiling module Inv_MixColumns
+-- Compiling module AddRoundKey
+-- Compiling module Test_AddRoundKey
+-- Compiling module DecryptionRound
+
+Top level modules:
+	Test_InvShiftRows
+	SubBytes2
+	InvSubBytes_DUT
+	Test_AddRoundKey
+	DecryptionRound
+
 } {} {}} {C:/Users/LAPTOP/OneDrive/Desktop/1_St Year/Second term/Adv logic/project/AddRoundKey.v} {1 {vlog -work work -stats=none {C:/Users/LAPTOP/OneDrive/Desktop/1_St Year/Second term/Adv logic/project/AddRoundKey.v}
 Model Technology ModelSim - Intel FPGA Edition vlog 10.5b Compiler 2016.10 Oct  5 2016
 -- Compiling module AddRoundKey
@@ -75,15 +77,7 @@ Model Technology ModelSim - Intel FPGA Edition vlog 10.5b Compiler 2016.10 Oct  
 Top level modules:
 	Test_AddRoundKey
 
-} {} {}} {C:/Users/LAPTOP/OneDrive/Desktop/1_St Year/Second term/Adv logic/project/InvSubBytes.v} {1 {vlog -work work -stats=none {C:/Users/LAPTOP/OneDrive/Desktop/1_St Year/Second term/Adv logic/project/InvSubBytes.v}
-Model Technology ModelSim - Intel FPGA Edition vlog 10.5b Compiler 2016.10 Oct  5 2016
--- Compiling module InvSubBytes
--- Compiling module InvSubBytes_DUT
-
-Top level modules:
-	InvSubBytes_DUT
-
-} {} {}} {C:/Users/LAPTOP/OneDrive/Desktop/1_St Year/Second term/Adv logic/project/InvShiftRows.v} {1 {vlog -work work -stats=none {C:/Users/LAPTOP/OneDrive/Desktop/1_St Year/Second term/Adv logic/project/InvShiftRows.v}
+} {} {}} {C:/Users/LAPTOP/OneDrive/Desktop/1_St Year/Second term/Adv logic/project/InvShiftRows.v} {1 {vlog -work work -stats=none {C:\Users\LAPTOP\OneDrive\Desktop\1_St Year\Second term\Adv logic\project\InvShiftRows.v}
 Model Technology ModelSim - Intel FPGA Edition vlog 10.5b Compiler 2016.10 Oct  5 2016
 -- Compiling module InvShiftRows
 -- Compiling module Test_InvShiftRows
@@ -91,19 +85,14 @@ Model Technology ModelSim - Intel FPGA Edition vlog 10.5b Compiler 2016.10 Oct  
 Top level modules:
 	Test_InvShiftRows
 
-} {} {}} {C:/Users/LAPTOP/OneDrive/Desktop/1_St Year/Second term/Adv logic/project/Inv_MixColumns.v} {1 {vlog -work work -stats=none {C:/Users/LAPTOP/OneDrive/Desktop/1_St Year/Second term/Adv logic/project/Inv_MixColumns.v}
+} {} {}} {C:/Users/LAPTOP/OneDrive/Desktop/1_St Year/Second term/Adv logic/project/InvSubBytes.v} {1 {vlog -work work -stats=none {C:/Users/LAPTOP/OneDrive/Desktop/1_St Year/Second term/Adv logic/project/InvSubBytes.v}
 Model Technology ModelSim - Intel FPGA Edition vlog 10.5b Compiler 2016.10 Oct  5 2016
--- Compiling module Inv_MixColumns
+-- Compiling module SubBytes2
+-- Compiling module InvSubBytes_DUT
 
 Top level modules:
-	Inv_MixColumns
-
-} {} {}} {C:/Users/LAPTOP/OneDrive/Desktop/1_St Year/Second term/Adv logic/project/MixColumns.v} {1 {vlog -work work -stats=none {C:/Users/LAPTOP/OneDrive/Desktop/1_St Year/Second term/Adv logic/project/MixColumns.v}
-Model Technology ModelSim - Intel FPGA Edition vlog 10.5b Compiler 2016.10 Oct  5 2016
--- Compiling module MixColumns
-
-Top level modules:
-	MixColumns
+	SubBytes2
+	InvSubBytes_DUT
 
 } {} {}} {C:/Users/LAPTOP/OneDrive/Desktop/1_St Year/Second term/Adv logic/project/EncryptionRound.v} {1 {vlog -work work -stats=none {C:/Users/LAPTOP/OneDrive/Desktop/1_St Year/Second term/Adv logic/project/EncryptionRound.v}
 Model Technology ModelSim - Intel FPGA Edition vlog 10.5b Compiler 2016.10 Oct  5 2016
@@ -121,5 +110,19 @@ Top level modules:
 	SubBytes_DUT
 	Test_AddRoundKey
 	EncryptionRound
+
+} {} {}} {C:/Users/LAPTOP/OneDrive/Desktop/1_St Year/Second term/Adv logic/project/MixColumns.v} {1 {vlog -work work -stats=none {C:/Users/LAPTOP/OneDrive/Desktop/1_St Year/Second term/Adv logic/project/MixColumns.v}
+Model Technology ModelSim - Intel FPGA Edition vlog 10.5b Compiler 2016.10 Oct  5 2016
+-- Compiling module MixColumns
+
+Top level modules:
+	MixColumns
+
+} {} {}} {C:/Users/LAPTOP/OneDrive/Desktop/1_St Year/Second term/Adv logic/project/Inv_MixColumns.v} {1 {vlog -work work -stats=none {C:/Users/LAPTOP/OneDrive/Desktop/1_St Year/Second term/Adv logic/project/Inv_MixColumns.v}
+Model Technology ModelSim - Intel FPGA Edition vlog 10.5b Compiler 2016.10 Oct  5 2016
+-- Compiling module Inv_MixColumns
+
+Top level modules:
+	Inv_MixColumns
 
 } {} {}}

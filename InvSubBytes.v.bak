@@ -1,12 +1,9 @@
 
-module InvSubBytes(instate,outstate);
+module SubBytes2 (instate,outstate);
 input[127:0]instate;
 output[127:0]outstate;
-reg[127:0]out_state;
-reg[3:0]row;
-reg[3:0]col;
-integer  i;
-// Setting the inverse Rijndael S-box as a 1D array (flattened)
+genvar  i;
+// Setting the Rijndael Inv_S_box as a 1D array (flattened)
 reg [7:0] Inv_S_box [0:255];
 initial
  begin
@@ -75,17 +72,17 @@ initial
     Inv_S_box[248] = 8'hE1; Inv_S_box[249] = 8'h69; Inv_S_box[250] = 8'h14; Inv_S_box[251] = 8'h63;
     Inv_S_box[252] = 8'h55; Inv_S_box[253] = 8'h21; Inv_S_box[254] = 8'h0C; Inv_S_box[255] = 8'h7D;
 end 
-initial
-begin                        
+generate                         
 for(i=0;i<128;i=i+8)
-begin 
+begin
+/*
 row=instate[(i+4)+:4];
-col=instate[i+:4];
-out_state[i +: 8]=Inv_S_box[row*16+col];
+ col=instate[i+:4];*/
+assign outstate[i +: 8]=S_box[instate[(i+4)+:4]*16+instate[i+:4]];
 end
-end
-assign outstate=out_state;
+endgenerate
 endmodule
+
 
 // test_bench for SubBytes 
 module InvSubBytes_DUT();
