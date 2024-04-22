@@ -74,7 +74,7 @@ initial
 end 
 generate                         
 for(i=0;i<128;i=i+8)
-begin
+begin: SubBytes
 /*
 row=instate[(i+4)+:4];
  col=instate[i+:4];*/

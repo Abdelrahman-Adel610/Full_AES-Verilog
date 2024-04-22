@@ -78,7 +78,7 @@ begin
 /*
 row=instate[(i+4)+:4];
  col=instate[i+:4];*/
-assign outstate[i +: 8]=S_box[instate[(i+4)+:4]*16+instate[i+:4]];
+assign outstate[i +: 8]=Inv_S_box[instate[(i+4)+:4]*16+instate[i+:4]];
 end
 endgenerate
 endmodule
