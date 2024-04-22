@@ -10,7 +10,6 @@ integer  i;
 reg [7:0] S_box [0:255];
 initial
  begin
-#1;
     S_box[0]  = 8'h63; S_box[1]  = 8'h7C; S_box[2]  = 8'h77; S_box[3]  = 8'h7B;
     S_box[4]  = 8'hF2; S_box[5]  = 8'h6B; S_box[6]  = 8'h6F; S_box[7]  = 8'hC5;
     S_box[8]  = 8'h30; S_box[9]  = 8'h01; S_box[10] = 8'h67; S_box[11] = 8'h2B;
@@ -77,7 +76,8 @@ initial
     S_box[252] = 8'hB0; S_box[253] = 8'h54; S_box[254] = 8'hBB; S_box[255] = 8'h16;
 end 
 initial
-begin                         
+begin
+#1;                          
 for(i=0;i<128;i=i+8)
 begin 
 row=instate[(i+4)+:4];
