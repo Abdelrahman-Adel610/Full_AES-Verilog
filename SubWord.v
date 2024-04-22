@@ -1,10 +1,7 @@
 module SubWord (instate,outstate);
 input[31:0]instate;
 output[31:0]outstate;
-reg[31:0]out_state;
-reg[3:0]row;
-reg[3:0]col;
-integer  i;
+genvar  i;
 // Setting the Rijndael S-box as a 1D array (flattened)
 reg [7:0] S_box [0:255];
 initial
@@ -74,24 +71,19 @@ initial
     S_box[248] = 8'h41; S_box[249] = 8'h99; S_box[250] = 8'h2D; S_box[251] = 8'h0F;
     S_box[252] = 8'hB0; S_box[253] = 8'h54; S_box[254] = 8'hBB; S_box[255] = 8'h16;
 end 
-initial
-begin
-#1;                          
+generate                         
 for(i=0;i<32;i=i+8)
-begin 
-row=instate[(i+4)+:4];
-col=instate[i+:4];
-out_state[i +: 8]=S_box[row*16+col];
+begin
+assign outstate[i +: 8]=S_box[instate[(i+4)+:4]*16+instate[i+:4]];
 end
-end
-assign outstate=out_state;
+endgenerate
 endmodule
 
 module Test_SubWord();
 reg [31:0] in;
 wire [31:0] out;
 initial begin
-    in = 128'h14dff409;
+    in = 32'h14dff409;
 end
 
 SubWord test(in, out);

@@ -1,7 +1,7 @@
 
-module SubWord (instate,outstate);
-input[31:0]instate;
-output[31:0]outstate;
+module SubBytes (instate,outstate);
+input[127:0]instate;
+output[127:0]outstate;
 genvar  i;
 // Setting the Rijndael S-box as a 1D array (flattened)
 reg [7:0] S_box [0:255];
@@ -73,20 +73,27 @@ initial
     S_box[252] = 8'hB0; S_box[253] = 8'h54; S_box[254] = 8'hBB; S_box[255] = 8'h16;
 end 
 generate                         
-for(i=0;i<32;i=i+8)
+for(i=0;i<128;i=i+8)
 begin
+/*
+row=instate[(i+4)+:4];
+ col=instate[i+:4];*/
 assign outstate[i +: 8]=S_box[instate[(i+4)+:4]*16+instate[i+:4]];
 end
 endgenerate
 endmodule
 
-module Test_SubWord();
-reg [31:0] in;
-wire [31:0] out;
-initial begin
-    in = 32'h14dff409;
+
+
+
+// test_bench for SubBytes 
+module SubBytes_DUT();
+reg [127:0]instate;
+wire [127:0]out;
+wire [127:0]out2;
+initial                                                 //expected output
+begin //...xxxxx  22      e0       65       f2       0f   ===============>...xxxxx   93   e1  4d  89  76
+instate=128'bx00100010_11100000_01100101_11110010_00001111;
 end
-
-SubWord test(in, out);
-
+SubBytes2 ss(instate,out);
 endmodule
