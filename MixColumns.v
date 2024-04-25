@@ -10,7 +10,7 @@ endfunction
 
 genvar i;
 generate 
-for (i = 1 ; i < 5 ; i = i + 1) begin 
+for (i = 1 ; i < 5 ; i = i + 1) begin : mix
     assign out[(i*32-1)-:8] = Mult2(in[(i*32-1)-:8]) ^ Mult3(in[(i*32-9)-:8]) ^ in[(i*32-17)-:8] ^ in[(i*32-25)-:8];
     assign out[(i*32-9)-:8] = in[(i*32-1)-:8] ^ Mult2(in[(i*32-9)-:8]) ^ Mult3(in[(i*32-17)-:8]) ^ in[(i*32-25)-:8];
     assign out[(i*32-17)-:8] = in[(i*32-1)-:8] ^ in[(i*32-9)-:8] ^ Mult2(in[(i*32-17)-:8]) ^ Mult3(in[(i*32-25)-:8]);
