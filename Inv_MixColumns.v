@@ -21,7 +21,7 @@ function [7:0] Mult0d (input [7:0] in4);
 endfunction
 genvar i;
 generate
-   for (i = 1 ; i < 5 ; i = i + 1) begin 
+   for (i = 1 ; i < 5 ; i = i + 1) begin : invMix
     assign out[(i*32-1)-:8] = Mult0e(in[(i*32-1)-:8]) ^ Mult0b(in[(i*32-9)-:8]) ^ Mult0d(in[(i*32-17)-:8]) ^ Mult9(in[(i*32-25)-:8]);
    assign out[(i*32-9)-:8] = Mult9(in[(i*32-1)-:8]) ^ Mult0e(in[(i*32-9)-:8]) ^ Mult0b(in[(i*32-17)-:8]) ^ Mult0d(in[(i*32-25)-:8]);
    assign out[(i*32-17)-:8] = Mult0d(in[(i*32-1)-:8]) ^ Mult9(in[(i*32-9)-:8]) ^ Mult0e(in[(i*32-17)-:8]) ^ Mult0b(in[(i*32-25)-:8]);
