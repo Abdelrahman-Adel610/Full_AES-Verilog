@@ -5,7 +5,7 @@
 module EncryptionRound(
     input wire [127:0] instate,
     input wire [127:0] roundKey,	
-    output wire [127:0] outstate
+    output reg [127:0] outstate , input clk
 );
 wire [127:0] SubBytes_outstate;
 wire [127:0] ShiftRows_outstate;
@@ -15,5 +15,6 @@ SubBytes  op1 (instate,SubBytes_outstate);
 ShiftRows  op2 (SubBytes_outstate,ShiftRows_outstate);
 MixColumns  op3 (ShiftRows_outstate,MixColumns_outstate);
 AddRoundKey op4 (MixColumns_outstate,AddRoundKey_outstate,roundKey);
-assign outstate=AddRoundKey_outstate;
+always @(posedge clk) 
+ outstate<=AddRoundKey_outstate;
 endmodule
