@@ -1,5 +1,5 @@
 Analysis & Synthesis report for main
-Thu Apr 18 21:29:29 2024
+Mon Apr 29 19:24:27 2024
 Quartus Prime Version 23.1std.0 Build 991 11/28/2023 SC Lite Edition
 
 
@@ -10,9 +10,15 @@ Quartus Prime Version 23.1std.0 Build 991 11/28/2023 SC Lite Edition
   2. Analysis & Synthesis Summary
   3. Analysis & Synthesis Settings
   4. Parallel Compilation
-  5. Port Connectivity Checks: "ShiftRows:test"
-  6. Elapsed Time Per Partition
-  7. Analysis & Synthesis Messages
+  5. Analysis & Synthesis Source Files Read
+  6. Analysis & Synthesis Resource Usage Summary
+  7. Analysis & Synthesis Resource Utilization by Entity
+  8. General Register Statistics
+  9. Multiplexer Restructuring Statistics (Restructuring Performed)
+ 10. Post-Synthesis Netlist Statistics for Top Partition
+ 11. Elapsed Time Per Partition
+ 12. Analysis & Synthesis Messages
+ 13. Analysis & Synthesis Suppressed Messages
 
 
 
@@ -36,22 +42,27 @@ https://fpgasoftware.intel.com/eula.
 
 
 
-+------------------------------------------------------------------------------+
-; Analysis & Synthesis Summary                                                 ;
-+-----------------------------+------------------------------------------------+
-; Analysis & Synthesis Status ; Failed - Thu Apr 18 21:29:29 2024              ;
-; Quartus Prime Version       ; 23.1std.0 Build 991 11/28/2023 SC Lite Edition ;
-; Revision Name               ; main                                           ;
-; Top-level Entity Name       ; main                                           ;
-; Family                      ; Cyclone V                                      ;
-; Logic utilization (in ALMs) ; N/A until Partition Merge                      ;
-; Total registers             ; N/A until Partition Merge                      ;
-; Total pins                  ; N/A until Partition Merge                      ;
-; Total virtual pins          ; N/A until Partition Merge                      ;
-; Total block memory bits     ; N/A until Partition Merge                      ;
-; Total PLLs                  ; N/A until Partition Merge                      ;
-; Total DLLs                  ; N/A until Partition Merge                      ;
-+-----------------------------+------------------------------------------------+
++----------------------------------------------------------------------------------+
+; Analysis & Synthesis Summary                                                     ;
++---------------------------------+------------------------------------------------+
+; Analysis & Synthesis Status     ; Successful - Mon Apr 29 19:24:27 2024          ;
+; Quartus Prime Version           ; 23.1std.0 Build 991 11/28/2023 SC Lite Edition ;
+; Revision Name                   ; main                                           ;
+; Top-level Entity Name           ; main                                           ;
+; Family                          ; Cyclone V                                      ;
+; Logic utilization (in ALMs)     ; N/A                                            ;
+; Total registers                 ; 772                                            ;
+; Total pins                      ; 397                                            ;
+; Total virtual pins              ; 0                                              ;
+; Total block memory bits         ; 0                                              ;
+; Total DSP Blocks                ; 0                                              ;
+; Total HSSI RX PCSs              ; 0                                              ;
+; Total HSSI PMA RX Deserializers ; 0                                              ;
+; Total HSSI TX PCSs              ; 0                                              ;
+; Total HSSI PMA TX Serializers   ; 0                                              ;
+; Total PLLs                      ; 0                                              ;
+; Total DLLs                      ; 0                                              ;
++---------------------------------+------------------------------------------------+
 
 
 +---------------------------------------------------------------------------------------------------------------------------+
@@ -150,20 +161,129 @@ https://fpgasoftware.intel.com/eula.
 ; Maximum allowed            ; 14          ;
 ;                            ;             ;
 ; Average used               ; 1.00        ;
-; Maximum used               ; 1           ;
+; Maximum used               ; 14          ;
 ;                            ;             ;
 ; Usage by Processor         ; % Time Used ;
 ;     Processor 1            ; 100.0%      ;
+;     Processor 2            ;   0.0%      ;
+;     Processor 3            ;   0.0%      ;
+;     Processor 4            ;   0.0%      ;
+;     Processor 5            ;   0.0%      ;
+;     Processor 6            ;   0.0%      ;
+;     Processor 7            ;   0.0%      ;
+;     Processors 8-14        ;   0.0%      ;
 +----------------------------+-------------+
 
 
-+--------------------------------------------------------------------------------------------------------------------+
-; Port Connectivity Checks: "ShiftRows:test"                                                                         ;
-+----------+--------+----------+-------------------------------------------------------------------------------------+
-; Port     ; Type   ; Severity ; Details                                                                             ;
-+----------+--------+----------+-------------------------------------------------------------------------------------+
-; outstate ; Output ; Info     ; Connected to dangling logic. Logic that only feeds a dangling port will be removed. ;
-+----------+--------+----------+-------------------------------------------------------------------------------------+
++---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+; Analysis & Synthesis Source Files Read                                                                                                                                                ;
++----------------------------------+-----------------+------------------------------+-----------------------------------------------------------------------------------------+---------+
+; File Name with User-Entered Path ; Used in Netlist ; File Type                    ; File Name with Absolute Path                                                            ; Library ;
++----------------------------------+-----------------+------------------------------+-----------------------------------------------------------------------------------------+---------+
+; main.v                           ; yes             ; User Verilog HDL File        ; C:/Users/LAPTOP/OneDrive/Desktop/1_St Year/Second term/Adv logic/project/main.v         ;         ;
+; ShiftRows.v                      ; yes             ; Auto-Found Verilog HDL File  ; C:/Users/LAPTOP/OneDrive/Desktop/1_St Year/Second term/Adv logic/project/ShiftRows.v    ;         ;
+; SubBytes.v                       ; yes             ; Auto-Found Verilog HDL File  ; C:/Users/LAPTOP/OneDrive/Desktop/1_St Year/Second term/Adv logic/project/SubBytes.v     ;         ;
+; display.v                        ; yes             ; Auto-Found Verilog HDL File  ; C:/Users/LAPTOP/OneDrive/Desktop/1_St Year/Second term/Adv logic/project/display.v      ;         ;
+; MixColumns.v                     ; yes             ; Auto-Found Verilog HDL File  ; C:/Users/LAPTOP/OneDrive/Desktop/1_St Year/Second term/Adv logic/project/MixColumns.v   ;         ;
+; AddRoundKey.v                    ; yes             ; Auto-Found Verilog HDL File  ; C:/Users/LAPTOP/OneDrive/Desktop/1_St Year/Second term/Adv logic/project/AddRoundKey.v  ;         ;
+; KeyExpansion.v                   ; yes             ; Auto-Found Verilog HDL File  ; C:/Users/LAPTOP/OneDrive/Desktop/1_St Year/Second term/Adv logic/project/KeyExpansion.v ;         ;
++----------------------------------+-----------------+------------------------------+-----------------------------------------------------------------------------------------+---------+
+
+
++---------------------------------------------------------+
+; Analysis & Synthesis Resource Usage Summary             ;
++---------------------------------------------+-----------+
+; Resource                                    ; Usage     ;
++---------------------------------------------+-----------+
+; Estimate of Logic utilization (ALMs needed) ; 3606      ;
+;                                             ;           ;
+; Combinational ALUT usage for logic          ; 4283      ;
+;     -- 7 input functions                    ; 113       ;
+;     -- 6 input functions                    ; 2801      ;
+;     -- 5 input functions                    ; 231       ;
+;     -- 4 input functions                    ; 283       ;
+;     -- <=3 input functions                  ; 855       ;
+;                                             ;           ;
+; Dedicated logic registers                   ; 772       ;
+;                                             ;           ;
+; I/O pins                                    ; 397       ;
+;                                             ;           ;
+; Total DSP Blocks                            ; 0         ;
+;                                             ;           ;
+; Maximum fan-out node                        ; clk~input ;
+; Maximum fan-out                             ; 772       ;
+; Total fan-out                               ; 25266     ;
+; Average fan-out                             ; 4.32      ;
++---------------------------------------------+-----------+
+
+
++---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+; Analysis & Synthesis Resource Utilization by Entity                                                                                                                                         ;
++----------------------------+---------------------+---------------------------+-------------------+------------+------+--------------+------------------------+---------------+--------------+
+; Compilation Hierarchy Node ; Combinational ALUTs ; Dedicated Logic Registers ; Block Memory Bits ; DSP Blocks ; Pins ; Virtual Pins ; Full Hierarchy Name    ; Entity Name   ; Library Name ;
++----------------------------+---------------------+---------------------------+-------------------+------------+------+--------------+------------------------+---------------+--------------+
+; |main                      ; 4283 (779)          ; 772 (772)                 ; 0                 ; 0          ; 397  ; 0            ; |main                  ; main          ; work         ;
+;    |AddRoundKey:AK|        ; 128 (128)           ; 0 (0)                     ; 0                 ; 0          ; 0    ; 0            ; |main|AddRoundKey:AK   ; AddRoundKey   ; work         ;
+;    |AddRoundKey:o1|        ; 128 (128)           ; 0 (0)                     ; 0                 ; 0          ; 0    ; 0            ; |main|AddRoundKey:o1   ; AddRoundKey   ; work         ;
+;    |KeyExpansion:kr|       ; 2444 (2444)         ; 0 (0)                     ; 0                 ; 0          ; 0    ; 0            ; |main|KeyExpansion:kr  ; KeyExpansion  ; work         ;
+;    |MixColumns:mc|         ; 152 (152)           ; 0 (0)                     ; 0                 ; 0          ; 0    ; 0            ; |main|MixColumns:mc    ; MixColumns    ; work         ;
+;    |SubBytes:su|           ; 640 (640)           ; 0 (0)                     ; 0                 ; 0          ; 0    ; 0            ; |main|SubBytes:su      ; SubBytes      ; work         ;
+;    |binary_to_bcd:DS|      ; 12 (12)             ; 0 (0)                     ; 0                 ; 0          ; 0    ; 0            ; |main|binary_to_bcd:DS ; binary_to_bcd ; work         ;
++----------------------------+---------------------+---------------------------+-------------------+------------+------+--------------+------------------------+---------------+--------------+
+Note: For table entries with two numbers listed, the numbers in parentheses indicate the number of resources of the given type used by the specific entity alone. The numbers listed outside of parentheses indicate the total resources of the given type used by the specific entity and all of its sub-entities in the hierarchy.
+
+
++------------------------------------------------------+
+; General Register Statistics                          ;
++----------------------------------------------+-------+
+; Statistic                                    ; Value ;
++----------------------------------------------+-------+
+; Total registers                              ; 772   ;
+; Number of registers using Synchronous Clear  ; 0     ;
+; Number of registers using Synchronous Load   ; 256   ;
+; Number of registers using Asynchronous Clear ; 0     ;
+; Number of registers using Asynchronous Load  ; 0     ;
+; Number of registers using Clock Enable       ; 768   ;
+; Number of registers using Preset             ; 0     ;
++----------------------------------------------+-------+
+
+
++------------------------------------------------------------------------------------------------------------------------------------------+
+; Multiplexer Restructuring Statistics (Restructuring Performed)                                                                           ;
++--------------------+-----------+---------------+----------------------+------------------------+------------+----------------------------+
+; Multiplexer Inputs ; Bus Width ; Baseline Area ; Area if Restructured ; Saving if Restructured ; Registered ; Example Multiplexer Output ;
++--------------------+-----------+---------------+----------------------+------------------------+------------+----------------------------+
+; 3:1                ; 128 bits  ; 256 LEs       ; 0 LEs                ; 256 LEs                ; Yes        ; |main|SubBytesIn[25]       ;
+; 4:1                ; 128 bits  ; 256 LEs       ; 0 LEs                ; 256 LEs                ; Yes        ; |main|AddRoundKeyIn[12]    ;
+; 17:1               ; 128 bits  ; 1408 LEs      ; 896 LEs              ; 512 LEs                ; Yes        ; |main|Current_key[24]      ;
++--------------------+-----------+---------------+----------------------+------------------------+------------+----------------------------+
+
+
++-----------------------------------------------------+
+; Post-Synthesis Netlist Statistics for Top Partition ;
++-----------------------+-----------------------------+
+; Type                  ; Count                       ;
++-----------------------+-----------------------------+
+; arriav_ff             ; 772                         ;
+;     ENA               ; 512                         ;
+;     ENA SLD           ; 256                         ;
+;     plain             ; 4                           ;
+; arriav_lcell_comb     ; 4287                        ;
+;     extend            ; 113                         ;
+;         7 data inputs ; 113                         ;
+;     normal            ; 4174                        ;
+;         0 data inputs ; 1                           ;
+;         1 data inputs ; 3                           ;
+;         2 data inputs ; 542                         ;
+;         3 data inputs ; 313                         ;
+;         4 data inputs ; 283                         ;
+;         5 data inputs ; 231                         ;
+;         6 data inputs ; 2801                        ;
+; boundary_port         ; 397                         ;
+;                       ;                             ;
+; Max LUT depth         ; 32.00                       ;
+; Average LUT depth     ; 18.43                       ;
++-----------------------+-----------------------------+
 
 
 +-------------------------------+
@@ -171,7 +291,7 @@ https://fpgasoftware.intel.com/eula.
 +----------------+--------------+
 ; Partition Name ; Elapsed Time ;
 +----------------+--------------+
-; Top            ; 00:00:00     ;
+; Top            ; 00:00:15     ;
 +----------------+--------------+
 
 
@@ -181,23 +301,92 @@ https://fpgasoftware.intel.com/eula.
 Info: *******************************************************************
 Info: Running Quartus Prime Analysis & Synthesis
     Info: Version 23.1std.0 Build 991 11/28/2023 SC Lite Edition
-    Info: Processing started: Thu Apr 18 21:29:24 2024
+    Info: Processing started: Mon Apr 29 19:24:05 2024
 Info: Command: quartus_map --read_settings_files=on --write_settings_files=off main -c main
 Warning (18236): Number of processors has not been specified which may cause overloading on shared machines.  Set the global assignment NUM_PARALLEL_PROCESSORS in your QSF to an appropriate value for best performance.
 Info (20030): Parallel compilation is enabled and will use 14 of the 14 processors detected
-Info (12021): Found 3 design units, including 3 entities, in source file main.v
+Info (12021): Found 8 design units, including 8 entities, in source file main.v
     Info (12023): Found entity 1: ShiftRows File: C:/Users/LAPTOP/OneDrive/Desktop/1_St Year/Second term/Adv logic/project/ShiftRows.v Line: 1
-    Info (12023): Found entity 2: Test_ShiftRows File: C:/Users/LAPTOP/OneDrive/Desktop/1_St Year/Second term/Adv logic/project/ShiftRows.v Line: 40
-    Info (12023): Found entity 3: main File: C:/Users/LAPTOP/OneDrive/Desktop/1_St Year/Second term/Adv logic/project/main.v Line: 2
+    Info (12023): Found entity 2: SubBytes File: C:/Users/LAPTOP/OneDrive/Desktop/1_St Year/Second term/Adv logic/project/SubBytes.v Line: 2
+    Info (12023): Found entity 3: binary_to_bcd File: C:/Users/LAPTOP/OneDrive/Desktop/1_St Year/Second term/Adv logic/project/display.v Line: 1
+    Info (12023): Found entity 4: seven_seg File: C:/Users/LAPTOP/OneDrive/Desktop/1_St Year/Second term/Adv logic/project/display.v Line: 33
+    Info (12023): Found entity 5: MixColumns File: C:/Users/LAPTOP/OneDrive/Desktop/1_St Year/Second term/Adv logic/project/MixColumns.v Line: 1
+    Info (12023): Found entity 6: AddRoundKey File: C:/Users/LAPTOP/OneDrive/Desktop/1_St Year/Second term/Adv logic/project/AddRoundKey.v Line: 1
+    Info (12023): Found entity 7: KeyExpansion File: C:/Users/LAPTOP/OneDrive/Desktop/1_St Year/Second term/Adv logic/project/KeyExpansion.v Line: 2
+    Info (12023): Found entity 8: main File: C:/Users/LAPTOP/OneDrive/Desktop/1_St Year/Second term/Adv logic/project/main.v Line: 8
 Info (12127): Elaborating entity "main" for the top level hierarchy
-Info (12128): Elaborating entity "ShiftRows" for hierarchy "ShiftRows:test" File: C:/Users/LAPTOP/OneDrive/Desktop/1_St Year/Second term/Adv logic/project/main.v Line: 10
-Warning (10855): Verilog HDL warning at ShiftRows.v(7): initial value for variable out should be constant File: C:/Users/LAPTOP/OneDrive/Desktop/1_St Year/Second term/Adv logic/project/ShiftRows.v Line: 7
-Warning (10030): Net "out" at ShiftRows.v(5) has no driver or initial value, using a default initial value '0' File: C:/Users/LAPTOP/OneDrive/Desktop/1_St Year/Second term/Adv logic/project/ShiftRows.v Line: 5
-Error (12061): Can't synthesize current design -- Top partition does not contain any logic
-Error: Quartus Prime Analysis & Synthesis was unsuccessful. 1 error, 3 warnings
-    Error: Peak virtual memory: 4788 megabytes
-    Error: Processing ended: Thu Apr 18 21:29:29 2024
-    Error: Elapsed time: 00:00:05
-    Error: Total CPU time (on all processors): 00:00:04
+Warning (10230): Verilog HDL assignment warning at main.v(44): truncated value with size 32 to match size of target (4) File: C:/Users/LAPTOP/OneDrive/Desktop/1_St Year/Second term/Adv logic/project/main.v Line: 44
+Info (12128): Elaborating entity "KeyExpansion" for hierarchy "KeyExpansion:kr" File: C:/Users/LAPTOP/OneDrive/Desktop/1_St Year/Second term/Adv logic/project/main.v Line: 28
+Info (12128): Elaborating entity "AddRoundKey" for hierarchy "AddRoundKey:o1" File: C:/Users/LAPTOP/OneDrive/Desktop/1_St Year/Second term/Adv logic/project/main.v Line: 29
+Warning (10235): Verilog HDL Always Construct warning at AddRoundKey.v(7): variable "Key" is read inside the Always Construct but isn't in the Always Construct's Event Control File: C:/Users/LAPTOP/OneDrive/Desktop/1_St Year/Second term/Adv logic/project/AddRoundKey.v Line: 7
+Info (12128): Elaborating entity "SubBytes" for hierarchy "SubBytes:su" File: C:/Users/LAPTOP/OneDrive/Desktop/1_St Year/Second term/Adv logic/project/main.v Line: 91
+Info (12128): Elaborating entity "ShiftRows" for hierarchy "ShiftRows:sr" File: C:/Users/LAPTOP/OneDrive/Desktop/1_St Year/Second term/Adv logic/project/main.v Line: 92
+Info (12128): Elaborating entity "MixColumns" for hierarchy "MixColumns:mc" File: C:/Users/LAPTOP/OneDrive/Desktop/1_St Year/Second term/Adv logic/project/main.v Line: 93
+Info (12128): Elaborating entity "binary_to_bcd" for hierarchy "binary_to_bcd:DS" File: C:/Users/LAPTOP/OneDrive/Desktop/1_St Year/Second term/Adv logic/project/main.v Line: 95
+Warning (10230): Verilog HDL assignment warning at display.v(16): truncated value with size 32 to match size of target (4) File: C:/Users/LAPTOP/OneDrive/Desktop/1_St Year/Second term/Adv logic/project/display.v Line: 16
+Warning (10230): Verilog HDL assignment warning at display.v(19): truncated value with size 32 to match size of target (4) File: C:/Users/LAPTOP/OneDrive/Desktop/1_St Year/Second term/Adv logic/project/display.v Line: 19
+Info (276014): Found 40 instances of uninferred RAM logic
+    Info (276007): RAM logic "KeyExpansion:kr|Ram0" is uninferred due to asynchronous read logic File: C:/Users/LAPTOP/OneDrive/Desktop/1_St Year/Second term/Adv logic/project/KeyExpansion.v Line: 31
+    Info (276007): RAM logic "KeyExpansion:kr|Ram1" is uninferred due to asynchronous read logic File: C:/Users/LAPTOP/OneDrive/Desktop/1_St Year/Second term/Adv logic/project/KeyExpansion.v Line: 31
+    Info (276007): RAM logic "KeyExpansion:kr|Ram2" is uninferred due to asynchronous read logic File: C:/Users/LAPTOP/OneDrive/Desktop/1_St Year/Second term/Adv logic/project/KeyExpansion.v Line: 31
+    Info (276007): RAM logic "KeyExpansion:kr|Ram3" is uninferred due to asynchronous read logic File: C:/Users/LAPTOP/OneDrive/Desktop/1_St Year/Second term/Adv logic/project/KeyExpansion.v Line: 31
+    Info (276007): RAM logic "KeyExpansion:kr|Ram4" is uninferred due to asynchronous read logic File: C:/Users/LAPTOP/OneDrive/Desktop/1_St Year/Second term/Adv logic/project/KeyExpansion.v Line: 31
+    Info (276007): RAM logic "KeyExpansion:kr|Ram5" is uninferred due to asynchronous read logic File: C:/Users/LAPTOP/OneDrive/Desktop/1_St Year/Second term/Adv logic/project/KeyExpansion.v Line: 31
+    Info (276007): RAM logic "KeyExpansion:kr|Ram6" is uninferred due to asynchronous read logic File: C:/Users/LAPTOP/OneDrive/Desktop/1_St Year/Second term/Adv logic/project/KeyExpansion.v Line: 31
+    Info (276007): RAM logic "KeyExpansion:kr|Ram7" is uninferred due to asynchronous read logic File: C:/Users/LAPTOP/OneDrive/Desktop/1_St Year/Second term/Adv logic/project/KeyExpansion.v Line: 31
+    Info (276007): RAM logic "KeyExpansion:kr|Ram8" is uninferred due to asynchronous read logic File: C:/Users/LAPTOP/OneDrive/Desktop/1_St Year/Second term/Adv logic/project/KeyExpansion.v Line: 31
+    Info (276007): RAM logic "KeyExpansion:kr|Ram9" is uninferred due to asynchronous read logic File: C:/Users/LAPTOP/OneDrive/Desktop/1_St Year/Second term/Adv logic/project/KeyExpansion.v Line: 31
+    Info (276007): RAM logic "KeyExpansion:kr|Ram10" is uninferred due to asynchronous read logic File: C:/Users/LAPTOP/OneDrive/Desktop/1_St Year/Second term/Adv logic/project/KeyExpansion.v Line: 31
+    Info (276007): RAM logic "KeyExpansion:kr|Ram11" is uninferred due to asynchronous read logic File: C:/Users/LAPTOP/OneDrive/Desktop/1_St Year/Second term/Adv logic/project/KeyExpansion.v Line: 31
+    Info (276007): RAM logic "KeyExpansion:kr|Ram12" is uninferred due to asynchronous read logic File: C:/Users/LAPTOP/OneDrive/Desktop/1_St Year/Second term/Adv logic/project/KeyExpansion.v Line: 31
+    Info (276007): RAM logic "KeyExpansion:kr|Ram13" is uninferred due to asynchronous read logic File: C:/Users/LAPTOP/OneDrive/Desktop/1_St Year/Second term/Adv logic/project/KeyExpansion.v Line: 31
+    Info (276007): RAM logic "KeyExpansion:kr|Ram14" is uninferred due to asynchronous read logic File: C:/Users/LAPTOP/OneDrive/Desktop/1_St Year/Second term/Adv logic/project/KeyExpansion.v Line: 31
+    Info (276007): RAM logic "KeyExpansion:kr|Ram15" is uninferred due to asynchronous read logic File: C:/Users/LAPTOP/OneDrive/Desktop/1_St Year/Second term/Adv logic/project/KeyExpansion.v Line: 31
+    Info (276007): RAM logic "KeyExpansion:kr|Ram16" is uninferred due to asynchronous read logic File: C:/Users/LAPTOP/OneDrive/Desktop/1_St Year/Second term/Adv logic/project/KeyExpansion.v Line: 31
+    Info (276007): RAM logic "KeyExpansion:kr|Ram17" is uninferred due to asynchronous read logic File: C:/Users/LAPTOP/OneDrive/Desktop/1_St Year/Second term/Adv logic/project/KeyExpansion.v Line: 31
+    Info (276007): RAM logic "KeyExpansion:kr|Ram18" is uninferred due to asynchronous read logic File: C:/Users/LAPTOP/OneDrive/Desktop/1_St Year/Second term/Adv logic/project/KeyExpansion.v Line: 31
+    Info (276007): RAM logic "KeyExpansion:kr|Ram19" is uninferred due to asynchronous read logic File: C:/Users/LAPTOP/OneDrive/Desktop/1_St Year/Second term/Adv logic/project/KeyExpansion.v Line: 31
+    Info (276007): RAM logic "KeyExpansion:kr|Ram20" is uninferred due to asynchronous read logic File: C:/Users/LAPTOP/OneDrive/Desktop/1_St Year/Second term/Adv logic/project/KeyExpansion.v Line: 31
+    Info (276007): RAM logic "KeyExpansion:kr|Ram21" is uninferred due to asynchronous read logic File: C:/Users/LAPTOP/OneDrive/Desktop/1_St Year/Second term/Adv logic/project/KeyExpansion.v Line: 31
+    Info (276007): RAM logic "KeyExpansion:kr|Ram22" is uninferred due to asynchronous read logic File: C:/Users/LAPTOP/OneDrive/Desktop/1_St Year/Second term/Adv logic/project/KeyExpansion.v Line: 31
+    Info (276007): RAM logic "KeyExpansion:kr|Ram23" is uninferred due to asynchronous read logic File: C:/Users/LAPTOP/OneDrive/Desktop/1_St Year/Second term/Adv logic/project/KeyExpansion.v Line: 31
+    Info (276007): RAM logic "KeyExpansion:kr|Ram24" is uninferred due to asynchronous read logic File: C:/Users/LAPTOP/OneDrive/Desktop/1_St Year/Second term/Adv logic/project/KeyExpansion.v Line: 31
+    Info (276007): RAM logic "KeyExpansion:kr|Ram25" is uninferred due to asynchronous read logic File: C:/Users/LAPTOP/OneDrive/Desktop/1_St Year/Second term/Adv logic/project/KeyExpansion.v Line: 31
+    Info (276007): RAM logic "KeyExpansion:kr|Ram26" is uninferred due to asynchronous read logic File: C:/Users/LAPTOP/OneDrive/Desktop/1_St Year/Second term/Adv logic/project/KeyExpansion.v Line: 31
+    Info (276007): RAM logic "KeyExpansion:kr|Ram27" is uninferred due to asynchronous read logic File: C:/Users/LAPTOP/OneDrive/Desktop/1_St Year/Second term/Adv logic/project/KeyExpansion.v Line: 31
+    Info (276007): RAM logic "KeyExpansion:kr|Ram28" is uninferred due to asynchronous read logic File: C:/Users/LAPTOP/OneDrive/Desktop/1_St Year/Second term/Adv logic/project/KeyExpansion.v Line: 31
+    Info (276007): RAM logic "KeyExpansion:kr|Ram29" is uninferred due to asynchronous read logic File: C:/Users/LAPTOP/OneDrive/Desktop/1_St Year/Second term/Adv logic/project/KeyExpansion.v Line: 31
+    Info (276007): RAM logic "KeyExpansion:kr|Ram30" is uninferred due to asynchronous read logic File: C:/Users/LAPTOP/OneDrive/Desktop/1_St Year/Second term/Adv logic/project/KeyExpansion.v Line: 31
+    Info (276007): RAM logic "KeyExpansion:kr|Ram31" is uninferred due to asynchronous read logic File: C:/Users/LAPTOP/OneDrive/Desktop/1_St Year/Second term/Adv logic/project/KeyExpansion.v Line: 31
+    Info (276007): RAM logic "KeyExpansion:kr|Ram32" is uninferred due to asynchronous read logic File: C:/Users/LAPTOP/OneDrive/Desktop/1_St Year/Second term/Adv logic/project/KeyExpansion.v Line: 31
+    Info (276007): RAM logic "KeyExpansion:kr|Ram33" is uninferred due to asynchronous read logic File: C:/Users/LAPTOP/OneDrive/Desktop/1_St Year/Second term/Adv logic/project/KeyExpansion.v Line: 31
+    Info (276007): RAM logic "KeyExpansion:kr|Ram34" is uninferred due to asynchronous read logic File: C:/Users/LAPTOP/OneDrive/Desktop/1_St Year/Second term/Adv logic/project/KeyExpansion.v Line: 31
+    Info (276007): RAM logic "KeyExpansion:kr|Ram35" is uninferred due to asynchronous read logic File: C:/Users/LAPTOP/OneDrive/Desktop/1_St Year/Second term/Adv logic/project/KeyExpansion.v Line: 31
+    Info (276007): RAM logic "KeyExpansion:kr|Ram36" is uninferred due to asynchronous read logic File: C:/Users/LAPTOP/OneDrive/Desktop/1_St Year/Second term/Adv logic/project/KeyExpansion.v Line: 31
+    Info (276007): RAM logic "KeyExpansion:kr|Ram37" is uninferred due to asynchronous read logic File: C:/Users/LAPTOP/OneDrive/Desktop/1_St Year/Second term/Adv logic/project/KeyExpansion.v Line: 31
+    Info (276007): RAM logic "KeyExpansion:kr|Ram38" is uninferred due to asynchronous read logic File: C:/Users/LAPTOP/OneDrive/Desktop/1_St Year/Second term/Adv logic/project/KeyExpansion.v Line: 31
+    Info (276007): RAM logic "KeyExpansion:kr|Ram39" is uninferred due to asynchronous read logic File: C:/Users/LAPTOP/OneDrive/Desktop/1_St Year/Second term/Adv logic/project/KeyExpansion.v Line: 31
+Warning (13024): Output pins are stuck at VCC or GND
+    Warning (13410): Pin "state_disp[10]" is stuck at GND File: C:/Users/LAPTOP/OneDrive/Desktop/1_St Year/Second term/Adv logic/project/main.v Line: 8
+    Warning (13410): Pin "state_disp[11]" is stuck at GND File: C:/Users/LAPTOP/OneDrive/Desktop/1_St Year/Second term/Adv logic/project/main.v Line: 8
+Info (286030): Timing-Driven Synthesis is running
+Info (144001): Generated suppressed messages file C:/Users/LAPTOP/OneDrive/Desktop/1_St Year/Second term/Adv logic/project/output_files/main.map.smsg
+Info (16010): Generating hard_block partition "hard_block:auto_generated_inst"
+    Info (16011): Adding 0 node(s), including 0 DDIO, 0 PLL, 0 transceiver and 0 LCELL
+Info (21057): Implemented 4936 device resources after synthesis - the final resource count might be different
+    Info (21058): Implemented 257 input pins
+    Info (21059): Implemented 140 output pins
+    Info (21061): Implemented 4539 logic cells
+Info: Quartus Prime Analysis & Synthesis was successful. 0 errors, 8 warnings
+    Info: Peak virtual memory: 4903 megabytes
+    Info: Processing ended: Mon Apr 29 19:24:27 2024
+    Info: Elapsed time: 00:00:22
+    Info: Total CPU time (on all processors): 00:00:09
+
+
++------------------------------------------+
+; Analysis & Synthesis Suppressed Messages ;
++------------------------------------------+
+The suppressed messages can be found in C:/Users/LAPTOP/OneDrive/Desktop/1_St Year/Second term/Adv logic/project/output_files/main.map.smsg.
 
 

@@ -3,13 +3,14 @@ module binary_to_bcd(in, out);
 input [7:0] in;
 output reg [11:0] out;
 
-integer i;
 
-always @* begin
-   
+integer i;
+always @(in)
+ begin
     out = 0;
 
-    for (i=0; i<8; i = i + 1) begin	
+    for (i=0; i<8; i = i + 1) 
+    begin	
 
     if (out[3:0] >= 5)
         out[3:0] = out[3:0] + 3;
@@ -25,6 +26,7 @@ always @* begin
     end
 
 end
+
 
 endmodule
 

@@ -1,10 +1,9 @@
 
 module SubBytes (instate,outstate);
 input[127:0]instate;
-output[127:0]outstate;
-genvar  i;
-function [7:0] S_box(input [7:0] word);  
-begin
+output reg[127:0]outstate;
+
+function [7:0] S_box(input [7:0] word); 
     case (word)
            8'h00: S_box=8'h63;
 	   8'h01: S_box=8'h7c;
@@ -263,12 +262,15 @@ begin
 	   8'hfe: S_box=8'hbb;
 	   8'hff: S_box=8'h16;
     endcase
-end
+
 endfunction
-generate                         
+integer i;        
+always@(instate) 
+begin      
 for(i=0;i<128;i=i+8)
 begin: SubBytes
-assign outstate[i +: 8]=S_box(instate[(i+4)+:4]*16+instate[i+:4]);
+outstate[i +: 8]=S_box(instate[(i+4)+:4]*16+instate[i+:4]);
 end
-endgenerate
+end
+
 endmodule

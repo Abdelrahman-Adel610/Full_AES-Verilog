@@ -1,4 +1,4 @@
-`include "Sand_Box"
+
 module KeyExpansion (initial_key,full_key);
 
  reg [31 : 0] Rcon [9 : 0];
@@ -321,16 +321,4 @@ endfunction
 		end
  endgenerate
   
-endmodule
-
-
-module Test_KeyExpansion();
-reg [127:0] in ;
-wire [1407:0] out;
-initial begin
-    in = 128'h2b7e151628aed2a6abf7158809cf4f3c;
-end
-
-KeyExpansion test(in, out);
-
 endmodule
