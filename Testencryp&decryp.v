@@ -621,6 +621,78 @@ Inv_Sand_Box z(instate[(i+4)+:4]*16+instate[i+:4],outstate[i +: 8]);
 end
 endgenerate
 endmodule
+
+module binary_to_bcd(in, out);
+
+input [7:0] in;
+output reg [11:0] out;
+
+integer i;
+
+always @* begin
+   
+    out = 0;
+
+    for (i=0; i<8; i = i + 1) begin	
+
+    if (out[3:0] >= 5)
+        out[3:0] = out[3:0] + 3;
+
+	if (out[7:4] >= 5)
+        out[7:4] = out[7:4] + 3;
+
+	if (out[11:8] >= 5)
+        out[11:8] = out[11:8] + 3;
+
+	out = {out[10:0], in[7-i]};		//Shift one bit
+
+    end
+
+end
+
+endmodule
+
+module seven_seg(input [3:0] in, output reg [6:0] HEX0);
+
+always@(*) begin
+
+if(in == 4'b0000)
+    HEX0 = 7'b1000000;
+
+else if(in == 4'b0001)
+    HEX0 = 7'b1111001;
+
+ else if(in == 4'b0010)
+    HEX0 = 7'b0100100;
+
+ else if(in == 4'b0011)
+    HEX0 = 7'b0110000;
+
+ else if(in == 4'b0100)
+    HEX0 = 7'b0011001;
+
+else if(in == 4'b0101)
+    HEX0 = 7'b0010010;
+
+else if(in == 4'b0110)
+    HEX0 = 7'b0000010;
+
+else if(in == 4'b0111)
+    HEX0 = 7'b1111000;
+
+else if(in == 4'b1000)
+    HEX0 = 7'b0000000;
+
+else if(in == 4'b1001)
+    HEX0 = 7'b0010000;
+
+else
+    HEX0 = 7'b1111111;
+
+end
+
+endmodule
+
  module DecryptionRound(
     input wire [127:0] instate,
     input wire [127:0] roundKey,	
@@ -695,7 +767,8 @@ out <= InvSubBytes_out;
 out <= roundout;
 end
 endmodule
-module Top_Level(input [127:0] in , input [127:0] key , output reg [127:0] out /*, output reg [20:0] seven_seg , input flagenryption , flagdecryption*/ , input clk);
+
+module Top_Level(input [127:0] in , input [127:0] key , output [127:0] out , output [20:0] seg_out /*input flagenryption , flagdecryption*/ , input clk);
 reg [127:0] nextstate;
 wire [127:0] addroundkey_out;
 wire [127:0] encryption_out;
@@ -704,18 +777,29 @@ wire [1407:0] full_key;
 wire [127:0] addroundoutdectyption;
 reg [7:0] count; 
 reg [127:0] nextkey;
+reg [127:0] state;
+wire [11:0] bcd;
+
 initial begin 
     count = 0;
 end
+assign out = state;
+
+binary_to_bcd btb(out[7-:8], bcd);
+seven_seg sevseg1 (bcd[11-:4], seg_out[20 -: 7]);
+seven_seg sevseg2 (bcd[7-:4], seg_out[13 -: 7]);
+seven_seg sevseg3 (bcd[3-:4], seg_out[6 -: 7]);
+
 KeyExpansion newkey (key , full_key);/// start calling Keyexpansion
 AddRoundKey opecrypt(in , addroundkey_out , full_key[127:0]);/// calling addroundkey  // in , out , key
+
 always@(posedge clk) begin 
   count <= count + 1;
   if (count == 0) begin
-  out <= addroundkey_out;
+  state <= addroundkey_out;
   end
   else begin
-  out <= nextstate;
+  state <= nextstate;
   end
   if(count < 10) begin // encryption stage
     nextkey <= full_key[(count*(128)+255)-:128];
@@ -724,9 +808,9 @@ always@(posedge clk) begin
     nextkey <= full_key[(count*(-128)+2687)-:128];
    end
 end
- AES_Encryption aese(out , encryption_out , nextkey , count);
-AES_Decryption aes(out , decryption_out , nextkey , count);
-AddRoundKey opdecrypt(out , addroundoutdectyption , nextkey);
+AES_Encryption aese(state , encryption_out , nextkey , count);
+AES_Decryption aes(state , decryption_out , nextkey , count);
+AddRoundKey opdecrypt(state , addroundoutdectyption , nextkey);
 always@(*) begin
    if (count > 0 && count < 11) begin
     nextstate <= encryption_out;
