@@ -723,54 +723,28 @@ else
 end
 
 endmodule
-
-
-
- module DecryptionRound(input wire [127:0] instate ,input wire [127:0] roundKey ,output [127:0] outstate );
-
-wire [127:0] InvSubBytes_outstate;
-wire [127:0] InvShiftRows_outstate;
-wire [127:0] Inv_MixColumns_outstate;
-wire [127:0] AddRoundKey_outstate;
-
-InvShiftRows  op2 (instate,InvShiftRows_outstate);
-InvSubBytes  op1 (InvShiftRows_outstate,InvSubBytes_outstate);
-AddRoundKey op3 (InvSubBytes_outstate,AddRoundKey_outstate,roundKey);
-Inv_MixColumns  op4 (AddRoundKey_outstate,outstate);
-
-endmodule
-
-
-module EncryptionRound(
-    input wire [127:0] instate,
-    input wire [127:0] roundKey,	
-    output [127:0] outstate 
-);
-wire [127:0] SubBytes_outstate;
-wire [127:0] ShiftRows_outstate;
-wire [127:0] MixColumns_outstate;
-wire [127:0] AddRoundKey_outstate;
-
-
-SubBytes  op1 (instate,SubBytes_outstate);
-ShiftRows  op2 (SubBytes_outstate,ShiftRows_outstate);
-MixColumns  op3 (ShiftRows_outstate,MixColumns_outstate);
-AddRoundKey op4 (MixColumns_outstate,outstate,roundKey);
-
-
-endmodule
-
-
+ 
 
  module AES_Encryption(input [127:0] in , output reg [127:0] out , input [127:0] Key  , input [7:0] count);
 wire [127:0] SubBytes_out;
 wire [127:0] ShiftRows_out;
 wire [127:0] roundout;
 wire [127:0] addout;
-EncryptionRound round(in , Key , roundout);
+wire [127:0] SubBytes_outstate;
+wire [127:0] ShiftRows_outstate;
+wire [127:0] MixColumns_outstate;
+wire [127:0] AddRoundKey_outstate;
+
+
+SubBytes  op1 (in,SubBytes_outstate);
+ShiftRows  op2 (SubBytes_outstate,ShiftRows_outstate);
+MixColumns  op3 (ShiftRows_outstate,MixColumns_outstate);
+AddRoundKey op4 (MixColumns_outstate,roundout,Key);
+
 SubBytes su (in , SubBytes_out);
 ShiftRows sh (SubBytes_out , ShiftRows_out);
 AddRoundKey ak (ShiftRows_out , addout , Key);
+
 always@(*) begin
   if (count < 9) begin 
     // calling encryptionround with in , out , key
@@ -791,11 +765,22 @@ wire [127:0] InvSubBytes_out;
 wire [127:0] InvShiftRows_out;
 wire [127:0] addroundkeyout;
 wire [127:0] roundout;
+wire [127:0] InvSubBytes_outstate;
+wire [127:0] InvShiftRows_outstate;
+wire [127:0] Inv_MixColumns_outstate;
+wire [127:0] AddRoundKey_outstate;
+
+InvShiftRows  op2 (in,InvShiftRows_outstate);
+InvSubBytes  op1 (InvShiftRows_outstate,InvSubBytes_outstate);
+AddRoundKey op3 (InvSubBytes_outstate,AddRoundKey_outstate,Key);
+Inv_MixColumns  op4 (AddRoundKey_outstate,roundout );
+
   //round 10
 InvShiftRows preIsh (in , InvShiftRows_out);
 InvSubBytes preIsu (InvShiftRows_out , InvSubBytes_out);
 AddRoundKey preak (InvSubBytes_out , addroundkeyout , Key);
-DecryptionRound dr (in ,  Key , roundout); // in , key , out
+ 
+
  always@(*) begin
   if (count < 19) begin 
     // calling encryptionround with in , out , key
@@ -898,7 +883,7 @@ endmodule
 
 
 
-module Top_Level(input rst , input clk , output [20:0] seg_out);
+module Top_Level(input rst , input clk , output [20:0] seg_out , output flag);
 reg [127:0] out;
 reg [127:0] in;
 reg [127:0] key; 
@@ -921,9 +906,8 @@ else
 end
 
 
-Encryption en(in , key , enctypout , clk , rst  );
-Decryption de(enctypout , key , decrypout , clk , rst );
-
+Encryption en(in , key , enctypout , clk , rst);
+Decryption de(enctypout , key , decrypout , clk , rst);
 
 always@(*) begin
 if(counter >= 10) begin
@@ -932,6 +916,8 @@ end
 else 
   out <= enctypout;
 end
+
+assign flag = (in == out)? 1'b1 : 1'b0;
 
 binary_to_bcd btb(out[7-:8], bcd);
 seven_seg sevseg1 (bcd[11-:4], seg_out[20 -: 7]);
