@@ -4,6 +4,10 @@ output  [127 : 0] outstate;
 input [127 : 0] Key;
 assign outstate = instate ^ Key;
 endmodule
+
+
+
+
  module Sand_Box(place,out);
 input wire [7:0] place;
 output[7:0]out;
@@ -77,6 +81,9 @@ begin
 end
 assign out=S_box[place];
 endmodule
+
+
+
 module SubBytes (instate,outstate);
 input[127:0]instate;
 output[127:0]outstate;
@@ -91,6 +98,10 @@ Sand_Box z(instate[(i+4)+:4]*16+instate[i+:4],outstate[i +: 8]);
 end
 endgenerate
 endmodule
+
+
+
+
  module ShiftRows(instate, outstate);
 
 input [127 : 0] instate;
@@ -125,6 +136,9 @@ assign outstate[7 -: 8] = instate[39 -: 8];
 
 endmodule
 
+
+
+
  module MixColumns(input [127:0] in , output [127:0] out);
 
 function [7:0] Mult2 (input [7:0] in1);
@@ -145,6 +159,8 @@ for (i = 1 ; i < 5 ; i = i + 1) begin : mix
 end
 endgenerate
 endmodule
+
+
 
 module KeyExpansion (initial_key,full_key);
 
@@ -470,6 +486,8 @@ endfunction
   
 endmodule
 
+
+
  
 module Inv_MixColumns(input [127:0] in , output [127:0] out);
 function [7:0] Mult2(input [7:0] in0);
@@ -501,6 +519,9 @@ generate
 end
 endgenerate
 endmodule
+
+
+
 module InvShiftRows(instate, outstate);
 
 input [127 : 0] instate;
@@ -533,6 +554,9 @@ assign outstate[39 -: 8] = instate[7 -: 8];
 assign outstate[7 -: 8] = instate[103 -: 8];
 
 endmodule
+
+
+
 module Inv_Sand_Box(place,outs);
 input wire [7:0] place;
   output[127:0]outs;
@@ -607,6 +631,9 @@ end
 assign outs=Inv_S_box[place];
 endmodule
 
+
+
+
 module InvSubBytes (instate,outstate);
 input[127:0]instate;
 output[127:0]outstate;
@@ -621,6 +648,8 @@ Inv_Sand_Box z(instate[(i+4)+:4]*16+instate[i+:4],outstate[i +: 8]);
 end
 endgenerate
 endmodule
+
+
 
 module binary_to_bcd(in, out);
 
@@ -651,6 +680,8 @@ always @* begin
 end
 
 endmodule
+
+
 
 module seven_seg(input [3:0] in, output reg [6:0] HEX0);
 
@@ -693,25 +724,23 @@ end
 
 endmodule
 
- module DecryptionRound(
-    input wire [127:0] instate,
-    input wire [127:0] roundKey,	
-    output  [127:0] outstate 
-);
+
+
+ module DecryptionRound(input wire [127:0] instate ,input wire [127:0] roundKey ,output [127:0] outstate );
+
 wire [127:0] InvSubBytes_outstate;
 wire [127:0] InvShiftRows_outstate;
 wire [127:0] Inv_MixColumns_outstate;
 wire [127:0] AddRoundKey_outstate;
 
-
-
-AddRoundKey op3 (instate,AddRoundKey_outstate,roundKey);
-Inv_MixColumns  op4 (AddRoundKey_outstate,Inv_MixColumns_outstate);
-InvShiftRows  op2 (Inv_MixColumns_outstate,InvShiftRows_outstate);
+InvShiftRows  op2 (instate,InvShiftRows_outstate);
 InvSubBytes  op1 (InvShiftRows_outstate,InvSubBytes_outstate);
-assign  outstate = InvSubBytes_outstate;
+AddRoundKey op3 (InvSubBytes_outstate,AddRoundKey_outstate,roundKey);
+Inv_MixColumns  op4 (AddRoundKey_outstate,outstate);
 
 endmodule
+
+
 module EncryptionRound(
     input wire [127:0] instate,
     input wire [127:0] roundKey,	
@@ -721,12 +750,19 @@ wire [127:0] SubBytes_outstate;
 wire [127:0] ShiftRows_outstate;
 wire [127:0] MixColumns_outstate;
 wire [127:0] AddRoundKey_outstate;
+
+
 SubBytes  op1 (instate,SubBytes_outstate);
 ShiftRows  op2 (SubBytes_outstate,ShiftRows_outstate);
 MixColumns  op3 (ShiftRows_outstate,MixColumns_outstate);
 AddRoundKey op4 (MixColumns_outstate,outstate,roundKey);
+
+
 endmodule
- module AES_Encryption(input [127:0] in , output reg [127:0] out , input [127:0] Key  , input[7:0]count);
+
+
+
+ module AES_Encryption(input [127:0] in , output reg [127:0] out , input [127:0] Key  , input [7:0] count);
 wire [127:0] SubBytes_out;
 wire [127:0] ShiftRows_out;
 wire [127:0] roundout;
@@ -736,88 +772,172 @@ SubBytes su (in , SubBytes_out);
 ShiftRows sh (SubBytes_out , ShiftRows_out);
 AddRoundKey ak (ShiftRows_out , addout , Key);
 always@(*) begin
-  if (count < 10) begin 
+  if (count < 9) begin 
     // calling encryptionround with in , out , key
      out<=roundout;
 end
-  else if (count == 10)
+  else if (count == 9)
 begin
     out<=addout;
 end
   end
 endmodule
+
+
+
 module AES_Decryption(input [127:0] in , output  reg [127:0] out , input [127:0] Key , input [7:0] count);
  
 wire [127:0] InvSubBytes_out;
 wire [127:0] InvShiftRows_out;
 wire [127:0] addroundkeyout;
 wire [127:0] roundout;
-  //round 1
-AddRoundKey preak (in , addroundkeyout , Key);
-InvShiftRows preIsh (addroundkeyout , InvShiftRows_out);
+  //round 10
+InvShiftRows preIsh (in , InvShiftRows_out);
 InvSubBytes preIsu (InvShiftRows_out , InvSubBytes_out);
- /////
+AddRoundKey preak (InvSubBytes_out , addroundkeyout , Key);
 DecryptionRound dr (in ,  Key , roundout); // in , key , out
-
-//  AddRoundKey ak (state[127:0] , out , full_key[127:0]);
-always@(*) begin 
-  if (count == 11)
-out <= InvSubBytes_out;
-  else if(count > 11)
-out <= roundout;
+ always@(*) begin
+  if (count < 19) begin 
+    // calling encryptionround with in , out , key
+     out <= roundout;
 end
+  else if (count == 19)
+begin
+    out <= addroundkeyout;
+end
+  end
 endmodule
 
-module Top_Level(input [127:0] in , input [127:0] key , output [127:0] out , output [20:0] seg_out /*input flagenryption , flagdecryption*/ , input clk);
-reg [127:0] nextstate;
-wire [127:0] addroundkey_out;
-wire [127:0] encryption_out;
-wire [127:0] decryption_out;
-wire [1407:0] full_key;
-wire [127:0] addroundoutdectyption;
-reg [7:0] count; 
-reg [127:0] nextkey;
-reg [127:0] state;
-wire [11:0] bcd;
 
-initial begin 
-    count = 0;
+
+module Decryption (input [127:0] in , input [127:0] key  , output [127:0] out , input clk , input rst );
+reg [127:0] state;
+wire [127:0] nextstate;
+wire [1407:0] full_key;
+reg [127:0] nextkey; 
+reg [7:0] count;
+
+KeyExpansion newkey (key , full_key);
+
+  
+
+AddRoundKey opdecrypt(in , nextstate , full_key[1407:1280]);
+
+ 
+AES_Decryption aes(state , out , nextkey , count);
+
+ 
+always@(posedge clk or posedge rst) begin 
+
+ if (rst) begin 
+	count = 0;
+ end 
+
+ else begin 
+	
+	if (count == 9) begin 
+	state <= nextstate;
+	nextkey <= full_key[(count*(-128)+2431)-:128];
+ end
+
+ else if (count > 9 ) begin
+    state <= out;
+	nextkey <= full_key[(count*(-128)+2431)-:128];
+	end
+
+	count <= count + 1;
+
+ end
+
+
 end
-assign out = state;
+
+endmodule 
+
+
+
+
+module Encryption(input [127:0] in , input [127:0] key  , output [127:0] out , input clk , input rst );
+wire [127:0] nextstate;
+reg [127:0] state; 
+reg [127:0] nextkey;
+wire [1407:0] full_key;
+reg [7:0] count;
+
+KeyExpansion newkey (key , full_key);       /// start calling Keyexpansion
+
+AddRoundKey opecrypt(in , nextstate , full_key[127:0]);     /// calling addroundkey  // in , out , key
+
+
+AES_Encryption aese(state , out , nextkey , count);   
+
+
+
+always@(posedge clk or posedge rst ) begin 
+	
+ if (rst) begin 
+	count = 0;
+	state = nextstate;
+	nextkey = full_key[(count*(128)+255)-:128];
+ end 
+
+    
+  else  begin
+
+    state <= out;
+	count = count + 1;
+    nextkey <= full_key[(count*(128)+255)-:128];
+  end
+
+  
+
+end
+ 
+endmodule
+
+
+
+
+module Top_Level(input rst , input clk , output [20:0] seg_out);
+reg [127:0] out;
+reg [127:0] in;
+reg [127:0] key; 
+reg [127:0] exp_encryption_out;
+wire [127:0] enctypout;
+wire [127:0] decrypout;
+wire [11:0] bcd;
+reg [7:0] counter;
+
+
+always@(posedge rst or posedge clk) begin
+if (rst) begin 
+ counter = 0;
+ in=128'h00112233445566778899aabbccddeeff;
+ key=128'h000102030405060708090a0b0c0d0e0f;
+ exp_encryption_out = 128'h69c4e0d86a7b0430d8cdb78070b4c55a;
+end
+else 
+ counter = counter + 1;
+end
+
+
+Encryption en(in , key , enctypout , clk , rst  );
+Decryption de(enctypout , key , decrypout , clk , rst );
+
+
+always@(*) begin
+if(counter > 10) begin
+  out <= decrypout;
+end
+else 
+  out <= enctypout;
+end
 
 binary_to_bcd btb(out[7-:8], bcd);
 seven_seg sevseg1 (bcd[11-:4], seg_out[20 -: 7]);
 seven_seg sevseg2 (bcd[7-:4], seg_out[13 -: 7]);
 seven_seg sevseg3 (bcd[3-:4], seg_out[6 -: 7]);
 
-KeyExpansion newkey (key , full_key);/// start calling Keyexpansion
-AddRoundKey opecrypt(in , addroundkey_out , full_key[127:0]);/// calling addroundkey  // in , out , key
-
-always@(posedge clk) begin 
-  count <= count + 1;
-  if (count == 0) begin
-  state <= addroundkey_out;
-  end
-  else begin
-  state <= nextstate;
-  end
-  if(count < 10) begin // encryption stage
-    nextkey <= full_key[(count*(128)+255)-:128];
-   end
-  else if(count >= 10) begin // decryption stage
-    nextkey <= full_key[(count*(-128)+2687)-:128];
-   end
-end
-AES_Encryption aese(state , encryption_out , nextkey , count);
-AES_Decryption aes(state , decryption_out , nextkey , count);
-AddRoundKey opdecrypt(state , addroundoutdectyption , nextkey);
-always@(*) begin
-   if (count > 0 && count < 11) begin
-    nextstate <= encryption_out;
-end
-else if (count >= 11 && count <= 20) 
-    nextstate <= decryption_out;
-else if (count >20)
-    nextstate <= addroundoutdectyption;
-end
 endmodule
+
+ 
