@@ -926,7 +926,7 @@ Decryption de(enctypout , key , decrypout , clk , rst );
 
 
 always@(*) begin
-if(counter > 10) begin
+if(counter >= 10) begin
   out <= decrypout;
 end
 else 
