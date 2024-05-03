@@ -725,45 +725,46 @@ end
 endmodule
  
 
- module AES_Encryption(input [127:0] in , output reg [127:0] out , input [127:0] Key  , input [7:0] count);
-wire [127:0] SubBytes_out;
-wire [127:0] ShiftRows_out;
+ module Encryption_Rounds(input [127:0] in , output reg [127:0] out , input [127:0] Key  , input [7:0] count);
+ 
 wire [127:0] roundout;
-wire [127:0] addout;
 wire [127:0] SubBytes_outstate;
 wire [127:0] ShiftRows_outstate;
 wire [127:0] MixColumns_outstate;
 wire [127:0] AddRoundKey_outstate;
+reg [127:0] instate_;
+reg [127:0] instate_2;
 
 
 SubBytes  op1 (in,SubBytes_outstate);
 ShiftRows  op2 (SubBytes_outstate,ShiftRows_outstate);
-MixColumns  op3 (ShiftRows_outstate,MixColumns_outstate);
-AddRoundKey op4 (MixColumns_outstate,roundout,Key);
-
-SubBytes su (in , SubBytes_out);
-ShiftRows sh (SubBytes_out , ShiftRows_out);
-AddRoundKey ak (ShiftRows_out , addout , Key);
+MixColumns  op3 (instate_ ,MixColumns_outstate);
+AddRoundKey op4 (instate_2 ,roundout,Key);
+ 
 
 always@(*) begin
   if (count < 9) begin 
-    // calling encryptionround with in , out , key
-     out<=roundout;
+    
+	instate_ <= ShiftRows_outstate;
+	instate_2 <= MixColumns_outstate;
+     out <= roundout;
+
 end
+
   else if (count == 9)
 begin
-    out<=addout;
+    instate_2 <= ShiftRows_outstate;
+    out<=roundout;
 end
   end
 endmodule
 
 
 
-module AES_Decryption(input [127:0] in , output  reg [127:0] out , input [127:0] Key , input [7:0] count);
+module Decryption_Rounds(input [127:0] in , output  reg [127:0] out , input [127:0] Key , input [7:0] count);
+
  
-wire [127:0] InvSubBytes_out;
-wire [127:0] InvShiftRows_out;
-wire [127:0] addroundkeyout;
+ 
 wire [127:0] roundout;
 wire [127:0] InvSubBytes_outstate;
 wire [127:0] InvShiftRows_outstate;
@@ -775,27 +776,24 @@ InvSubBytes  op1 (InvShiftRows_outstate,InvSubBytes_outstate);
 AddRoundKey op3 (InvSubBytes_outstate,AddRoundKey_outstate,Key);
 Inv_MixColumns  op4 (AddRoundKey_outstate,roundout );
 
-  //round 10
-InvShiftRows preIsh (in , InvShiftRows_out);
-InvSubBytes preIsu (InvShiftRows_out , InvSubBytes_out);
-AddRoundKey preak (InvSubBytes_out , addroundkeyout , Key);
  
-
  always@(*) begin
+
   if (count < 19) begin 
-    // calling encryptionround with in , out , key
      out <= roundout;
-end
+    end
+
   else if (count == 19)
-begin
-    out <= addroundkeyout;
-end
+  begin
+    out <= AddRoundKey_outstate;
+  end
+
   end
 endmodule
 
 
 
-module Decryption (input [127:0] in , input [127:0] key  , output [127:0] out , input clk , input rst );
+module AES_Decryption (input [127:0] in , input [127:0] key  , output [127:0] out , input clk , input rst );
 reg [127:0] state;
 wire [127:0] nextstate;
 wire [1407:0] full_key;
@@ -809,7 +807,7 @@ KeyExpansion newkey (key , full_key);
 AddRoundKey opdecrypt(in , nextstate , full_key[1407:1280]);
 
  
-AES_Decryption aes(state , out , nextkey , count);
+Decryption_Rounds aes(state , out , nextkey , count);
 
  
 always@(posedge clk or posedge rst) begin 
@@ -842,19 +840,19 @@ endmodule
 
 
 
-module Encryption(input [127:0] in , input [127:0] key  , output [127:0] out , input clk , input rst );
+module AES_Encryption(input [127:0] in , input [127:0] key  , output [127:0] out , input clk , input rst );
 wire [127:0] nextstate;
 reg [127:0] state; 
 reg [127:0] nextkey;
 wire [1407:0] full_key;
 reg [7:0] count;
 
-KeyExpansion newkey (key , full_key);       /// start calling Keyexpansion
+KeyExpansion newkey (key , full_key);        
 
-AddRoundKey opecrypt(in , nextstate , full_key[127:0]);     /// calling addroundkey  // in , out , key
+AddRoundKey opecrypt(in , nextstate , full_key[127:0]);    
 
 
-AES_Encryption aese(state , out , nextkey , count);   
+Encryption_Rounds aese(state , out , nextkey , count);   
 
 
 
@@ -883,7 +881,7 @@ endmodule
 
 
 
-module Top_Level(input rst , input clk , output [20:0] seg_out , output flag);
+module AES(input rst , input clk , output [20:0] seg_out , output flag);
 reg [127:0] out;
 reg [127:0] in;
 reg [127:0] key; 
@@ -906,8 +904,8 @@ else
 end
 
 
-Encryption en(in , key , enctypout , clk , rst);
-Decryption de(enctypout , key , decrypout , clk , rst);
+AES_Encryption en(in , key , enctypout , clk , rst);
+AES_Decryption de(enctypout , key , decrypout , clk , rst);
 
 always@(*) begin
 if(counter >= 10) begin
