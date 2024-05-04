@@ -4,16 +4,20 @@ module AES(input clk, input rst, output [20:0] sevseg, output flag);
 	reg [127:0] Key;
 	wire [127:0] enout;
 	wire [127:0] deout;
-	wire [20:0] ensevseg;
-	wire [20:0] desevseg;
 	reg [5:0] counter;
+	wire [127:0] out;
+	wire [11:0] bcd;
 
-	Encryption en(in, Key, counter, clk, ensevseg, enout);
-	Decryption de(enout, Key, counter, clk, desevseg, deout);
+	Encryption en(in, Key, counter, clk, enout);
+	Decryption de(enout, Key, counter, clk, deout);
 
-	assign sevseg = (counter <= 6'd10)? ensevseg : desevseg;
+	binary_to_bcd btb(out[7:0], bcd);
+	seven_seg sevseg1(bcd[11 -: 4], sevseg[20 -: 7]);
+	seven_seg sevseg2(bcd[7 -: 4], sevseg[13 -: 7]);
+	seven_seg sevseg3(bcd[3 -: 4], sevseg[6 -: 7]);
+
+	assign out = (counter <= 6'd10)? enout : deout;
 	assign flag = (in == deout)? 1'b1 : 1'b0;
-    
 
 	always@(posedge clk, posedge rst) begin
 
@@ -26,6 +30,6 @@ module AES(input clk, input rst, output [20:0] sevseg, output flag);
 		else if (counter < 20) begin
 			counter <= counter + 6'd1;
 		end
-	end
 
+	end
 endmodule
