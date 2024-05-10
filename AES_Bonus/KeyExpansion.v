@@ -1,17 +1,18 @@
-module KeyExpansion (initial_key,full_key);
+module KeyExpansion #(parameter Nr=12,parameter Nk=6)(initial_key,full_key);
 
  reg [31 : 0] Rcon [9 : 0];
- input [127 : 0] initial_key;
- wire [31 : 0] full_keys [43 : 0];
- output [1407 : 0] full_key;
- genvar j,k;
+ input [(Nk * 32 - 1) : 0] initial_key;
+ wire [31 : 0] full_keys [(4 * (Nr + 1)-1) : 0];
+ output [((Nr + 1) * 128 - 1) : 0] full_key;
+ genvar j,k,p;
  integer i;
 
- assign full_keys [0] = initial_key [127 : 96];
- assign full_keys [1] = initial_key [95 : 64];
- assign full_keys [2] = initial_key [63 : 32];
- assign full_keys [3] = initial_key [31 : 0];
- 
+ generate
+	for(p = 0; p < Nk; p = p + 1)
+	begin : initialize_block
+	assign full_keys[p] = initial_key[((Nk - p) * 32 - 1) -: 32];
+	end
+ endgenerate
  initial
 	begin
 		Rcon [0] = 32'h01000000;
@@ -25,6 +26,7 @@ module KeyExpansion (initial_key,full_key);
 		Rcon [8] = 32'h1b000000;
 		Rcon [9] = 32'h36000000;
 	end
+
 function [7:0] S_box(input [7:0] word);  
 begin
     case (word)
@@ -287,11 +289,10 @@ begin
     endcase
 end
 endfunction
-
- function [31 : 0] SubWord (input [31 : 0] Word);                      
+  function [31 : 0] SubWord (input [31 : 0] Word);                      
 	for(i = 0; i < 32; i = i + 8)
 		begin : sub_block
-			SubWord[i +: 8] = S_box(Word[i +: 8]);
+          SubWord[i +: 8] = S_box(Word[i +: 8]);
 		end
  endfunction
 
@@ -300,25 +301,30 @@ endfunction
  endfunction
   
  generate
-	for(j = 4; j < 44; j = j + 1) 
+	for(j = Nk; j < (4 * (Nr + 1)); j = j + 1) 
 		begin : my_block
-			if(j % 4 == 0)
+			if(j % Nk == 0)
 				begin
-					assign full_keys[j] = SubWord(RotWord(full_keys[j -1 ])) ^ Rcon [(j - 4) / 4] ^ full_keys[j - 4];
+                  assign full_keys[j] = SubWord(RotWord(full_keys[j -1 ])) ^ Rcon [(j - Nk) / Nk] ^ full_keys[j - Nk];
+				end
+			else if((Nk == 8) && (j % 4 == 0))
+		      begin
+						assign full_keys[j] = SubWord(full_keys[j -1 ]) ^ full_keys[j - Nk];
 				end
 			else
 				begin
-					assign full_keys[j] = full_keys[j - 4] ^ full_keys[j - 1];
+					assign full_keys[j] = full_keys[j - Nk] ^ full_keys[j - 1];
 				end
 		end 
  endgenerate
  
  generate 
-	for(k = 0; k < 44; k = k + 1) 
-		begin : second_block
-			assign full_key[(((3 - (k % 4)) + 4 * (k / 4)) * 32) +: 32] = full_keys[k];
-		end
- endgenerate
-  
-endmodule
  
+	for(k = 0; k < (Nr + 1); k = k + 1) 
+		begin : second_block
+			assign full_key[(k * 128) +: 128] = {full_keys[4 * k ],full_keys[4 * k + 1],full_keys[4 * k + 2],full_keys[4 * k + 3]};
+		end
+		
+ endgenerate
+
+endmodule
