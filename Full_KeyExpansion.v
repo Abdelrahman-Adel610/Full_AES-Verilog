@@ -320,18 +320,13 @@ endfunction
  
  generate 
  
-	for(k = 0; k < (Nk*(4 * (Nr + 1)/Nk)); k = k + 1) 
+	for(k = 0; k < (Nr + 1); k = k + 1) 
 		begin : second_block
-			assign full_key[((((Nk-1) - (k % Nk)) + Nk * (k / Nk)) * 32) +: 32] = full_keys[k];
+			assign full_key[(k * 128) +: 128] = {full_keys[4 * k ],full_keys[4 * k + 1],full_keys[4 * k + 2],full_keys[4 * k + 3]};
 		end
 		
  endgenerate
- generate
- if( Nk == 6 || Nk == 8)
- begin
- assign full_key[((Nr + 1) * 128 - 1) -: 128] = {full_keys[(Nk*(4 * (Nr + 1)/Nk))],full_keys[(Nk*(4 * (Nr + 1)/Nk))+1],full_keys[(Nk*(4 * (Nr + 1)/Nk))+2],full_keys[(Nk*(4 * (Nr + 1)/Nk))]+3};
- end
- endgenerate
+
 endmodule
 
 
