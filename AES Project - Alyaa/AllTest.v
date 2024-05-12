@@ -1146,16 +1146,16 @@ wire [127:0] inShift;
 wire [127:0] inMix;
 wire [127:0] outMix;
 reg [127:0] stored;
-wire [127:0] currentKey;
+ 
  
  
 
-assign currentKey = (maxRound == 10)? full_key[((counter)*(128)+127)-:128] : ((maxRound == 12)? full_key[((counter)*(128)+127)-:128] : full_key[((counter)*(128)+127)-:128]);
+//assign currentKey = (maxRound == 10)? full_key[((counter)*(128)+127)-:128] : ((maxRound == 12)? full_key[((counter)*(128)+127)-:128] : full_key[((counter)*(128)+127)-:128]);
 
 assign inRound = (counter == 0)? in : stored;
 assign out = (counter == 0)? in : inSub;
 
-AddRoundKey op4 (inRound, inSub, currentKey);
+AddRoundKey op4 (inRound, inSub, full_key[((counter)*(128)+127)-:128]);
 SubBytes  op1 (inSub, inShift);
 ShiftRows  op2 (inShift, inMix);
 MixColumns  op3 (inMix, outMix);
@@ -1173,7 +1173,7 @@ end
 endmodule
 
 
-module AES(input clk, input rst, output [20:0] sevseg, output flag, input [1:0] sel);
+module AES(input clk, input rst, output [20:0] sevseg, output reg flag, input [1:0] sel);
 	
 	reg [127:0] in;
 	reg [255:0] Key;
@@ -1213,20 +1213,23 @@ module AES(input clk, input rst, output [20:0] sevseg, output flag, input [1:0] 
 
 	if (sel == 0) begin 
 		  out = (counter <= 10)? enout128 : deout128;
+		  flag = (in == deout128)? 1'b1 : 1'b0;
 	end
 	else if (sel == 1) begin 
 		 
 		  out = (counter <= 12)? enout192 : deout192;
+		  flag = (in == deout192)? 1'b1 : 1'b0;
 	end
 	else begin 
 		 
 		  out = (counter <= 14)? enout256 : deout192;
+		  flag = (in == deout256)? 1'b1 : 1'b0;
 	end
 
 	end 
 
-	assign flag = (in == out)? 1'b1 : 1'b0;
-
+ 
+       
 	always@(posedge clk, posedge rst) begin
 
 		if(rst) begin
