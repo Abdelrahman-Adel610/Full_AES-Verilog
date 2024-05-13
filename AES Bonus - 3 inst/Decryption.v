@@ -16,7 +16,7 @@ assign inRound = (counter == maxRound)? in : stored;
 assign inShift = (counter == maxRound)? inMix : outMix;
 
 //Out in first round is the same as input, in last round is the output of addRoundKey, else it's output of invMixColumns
-assign out = (counter == maxRound)? in : ((counter == (maxRound + maxRound - 6'd1))? outMix : inMix);
+assign out = (counter == maxRound)? in : ((counter == (maxRound + maxRound ))? inMix : outMix);
 assign currentKey = (maxRound == 10)? full_key[((counter - 6'd10)*(-128) + 1407) -: 128] : ((maxRound == 12)? full_key[((counter - 6'd12)*(-128) + 1663) -: 128] : full_key[((counter - 6'd14)*(-128) + 1919) -: 128]);
 
 AddRoundKey op1 (inRound, inMix, currentKey);
