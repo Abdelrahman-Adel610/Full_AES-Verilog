@@ -12,3 +12,5 @@ At the final round if the input is as same as the output of the decryption opera
 
 _To switch between the the AES systems you have to reset then switch (no parallel output)_
 **for parallel output ,kindly go to design A or B :relaxed::relaxed:**
+
+### :movie_camera:[The projcet video](https://drive.google.com/file/d/1vu6kbl6otaXAbTUy8kQgOcwuET_7oc7g/view?usp=sharing):movie_camera: (design A)
