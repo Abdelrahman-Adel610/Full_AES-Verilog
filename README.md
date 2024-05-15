@@ -11,4 +11,4 @@ At the final round if the input is as same as the output of the decryption opera
 4. By any change on the counter the Display reg is been updated according the AES logic. (Display reg is resposible for storing the least eight significant bits of each state at the begining of the round )
 
 _To switch between the the AES systems you have to reset then switch (no parallel output)_
-**for parallel output ,kindly go to design A or B :relaxed::relaxed: **
+**for parallel output ,kindly go to design A or B :relaxed::relaxed:**
